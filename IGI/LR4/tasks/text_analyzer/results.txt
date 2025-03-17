@@ -1,0 +1,12 @@
+
+        === Text Analysis Results ===
+        Total sentences: 6
+        Narrative: 6, Question: 0, Imperative: 0
+
+        Average sentence length (characters): 7.83
+        Average word length: 7.83
+
+        Found smilies: None
+
+        Repeated words: he
+        
