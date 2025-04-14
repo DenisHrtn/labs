@@ -2,7 +2,9 @@ import sys
 
 
 def get_input(prompt, allow_exit=True):
-    """Функция для получения строки с возможностью выхода."""
+    """
+    Функция для получения строки с возможностью выхода.
+    """
     while True:
         value = input(prompt).strip()
         if allow_exit and value == '0':

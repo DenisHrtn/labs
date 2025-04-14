@@ -7,7 +7,9 @@ from tasks.geometric.figure_color import FigureColor
 
 
 class Pentagon(GeometricFigure):
-    """Класс Правильный пятиугольник."""
+    """
+    Класс Правильный пятиугольник.
+    """
     name = "Пятиугольник"
 
     def __init__(self, side: float, color: str):
@@ -37,4 +39,4 @@ class Pentagon(GeometricFigure):
         plt.text(0, 0, text, ha='center', va='center', fontsize=12)
         plt.grid()
         plt.savefig("pentagon.png")
-        plt.show()
+        plt.close(fig)

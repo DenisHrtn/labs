@@ -1,6 +1,10 @@
 import math
+import matplotlib
 import matplotlib.pyplot as plt
 from statistics import mean, median, mode, variance
+
+
+matplotlib.use('TkAgg')
 
 
 class LogSeries:
@@ -13,15 +17,15 @@ class LogSeries:
         self.series_values = []
         self.num_terms = 0
         self.approx_value = self.calculate_series()
-        self.math_value = math.log(1 - x)
+        self.math_value = math.log(1 + x)
 
     def calculate_series(self):
         sum_value = 0
         term = self.x
         n = 1
 
-        while abs(term) > self.eps and n < self.max_iter:
-            sum_value -= term / n
+        while abs(term / n) > self.eps and n < self.max_iter:
+            sum_value += ((-1) ** (n - 1)) * term / n
             self.series_values.append(sum_value)
             n += 1
             term *= self.x
@@ -39,7 +43,7 @@ class LogSeries:
         }
 
     def plot_series(self):
-        n_values = list(range(1, len(self.series_values) + 1))  # Обновленный список n
+        n_values = list(range(1, len(self.series_values) + 1))
         plt.figure(figsize=(8, 5))
 
         plt.plot(n_values, self.series_values, label='Series Approximation', color='blue')

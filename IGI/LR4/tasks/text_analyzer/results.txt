@@ -1,12 +1,19 @@
 
         === Text Analysis Results ===
-        Total sentences: 6
-        Narrative: 6, Question: 0, Imperative: 0
+        Total sentences: 8
+        Narrative: 8, Question: 0, Imperative: 0
 
-        Average sentence length (characters): 7.83
-        Average word length: 7.83
+        Average sentence length (characters): 7.12
+        Average word length: 7.12
 
         Found smilies: None
 
         Repeated words: he
+
+        Words shorter than 5 characters: She, The, He, He, And
+        Shortest word starting with 'a': and
+
+        Highlighted lower-upper pairs in test string: ECerwqvreqvknqerqveqrverqrejknv. She. The. He. He. EWfr3f. And. Analyze.
+        Total words in test string: 8
+        Even-length words: He, He, EWfr3f
         

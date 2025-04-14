@@ -3,7 +3,9 @@ from tasks.text_analyzer.text_analyzer import TextAnalyzer
 
 
 class InteractiveTextAnalyzer:
-    """Provides an interactive interface for analyzing a text file."""
+    """
+    Provides an interactive interface for analyzing a text file.
+    """
 
     def __init__(self):
         self.filename = "input.txt"
@@ -11,7 +13,9 @@ class InteractiveTextAnalyzer:
         self.text = ""
 
     def load_text(self):
-        """Loads text from the file."""
+        """
+        Loads text from the file.
+        """
         self.text = FileManager.read_text(self.filename)
         if not self.text:
             print("No text available for analysis.")
@@ -19,13 +23,20 @@ class InteractiveTextAnalyzer:
         return True
 
     def analyze_text(self):
-        """Performs text analysis and saves results."""
+        """
+        Performs text analysis and saves results.
+        """
         analyzer = TextAnalyzer(self.text)
         total_sentences, narrative, question, imperative = analyzer.count_sentences()
         avg_sent_len = analyzer.avg_sentence_length()
         avg_word_len = analyzer.avg_word_length()
         smilies = analyzer.find_smilies()
         repeated_words = analyzer.repeated_words()
+        short_words = analyzer.short_words()
+        shortest_a_word = analyzer.shortest_word_starting_with_a()
+
+        highlighted = analyzer.highlight_lower_upper_pairs(self.text)
+        word_count, even_words = analyzer.even_length_words(self.text)
 
         result_text = f"""
         === Text Analysis Results ===
@@ -37,7 +48,14 @@ class InteractiveTextAnalyzer:
 
         Found smilies: {', '.join(smilies) if smilies else 'None'}
 
-        Repeated words: {', '.join(repeated_words)}
+        Repeated words: {', '.join(repeated_words) if repeated_words else 'None'}
+
+        Words shorter than 5 characters: {', '.join(short_words) if short_words else 'None'}
+        Shortest word starting with 'a': {shortest_a_word if shortest_a_word else 'None'}
+
+        Highlighted lower-upper pairs in test string: {highlighted}
+        Total words in test string: {word_count}
+        Even-length words: {', '.join(even_words) if even_words else 'None'}
         """
         print(result_text)
         FileManager.save_results(result_text, self.results_filename)
@@ -45,7 +63,9 @@ class InteractiveTextAnalyzer:
         print(f"Results saved to {self.results_filename} and archived as {zip_file}")
 
     def start(self):
-        """Starts the interactive loop."""
+        """
+        Starts the interactive loop.
+        """
         while True:
             print("\n1. Load text")
             print("2. Analyze text")

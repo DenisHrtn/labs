@@ -34,4 +34,5 @@ class Rectangle(GeometricFigure):
         plt.text(self.width / 2, self.height / 2, text, ha='center', va='center', fontsize=12)
         plt.grid()
         plt.savefig("rectangle.png")
-        plt.show()
+        plt.close(fig)
+

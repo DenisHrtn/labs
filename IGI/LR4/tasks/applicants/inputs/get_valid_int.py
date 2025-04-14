@@ -2,7 +2,9 @@ import sys
 
 
 def get_valid_int(prompt, min_val, max_val):
-    """Функция для получения корректного числа в заданном диапазоне."""
+    """
+    Функция для получения корректного числа в заданном диапазоне.
+    """
     while True:
         try:
             value = input(prompt).strip()
