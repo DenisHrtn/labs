@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+<h2>Сводная таблица по заказам клиентов</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Клиент</th>
+            <th>Город</th>
+            <th>Объем (шт)</th>
+            <th>Сумма (BYN)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in client_summary %}
+        <tr>
+            <td>{{ row.order__customer__name }}</td>
+            <td>{{ row.order__customer__city }}</td>
+            <td>{{ row.total_quantity }}</td>
+            <td>{{ row.total_spent|floatformat:2 }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Диаграмма -->
+<h3>Объем продаж по клиентам</h3>
+<canvas id="clientChart" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('clientChart').getContext('2d');
+    const clientChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {% for row in client_summary %} '{{ row.order__customer__name }}', {% endfor %},
+            datasets: [{
+                label: 'Объем продаж (шт)',
+                data: {% for row in client_summary %} {{ row.total_quantity }}, {% endfor %},
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: true
+            }]
+        }
+    });
+</script>
+{% endblock %}
+</body>
+</html>

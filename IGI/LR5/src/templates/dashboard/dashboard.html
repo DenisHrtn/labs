@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <!-- templates/products/dashboard.html -->
+{% block content %}
+  <h1>{{ title }}</h1>
+
+  {% if orders %}
+    <table>
+      <thead>
+        <tr>
+          <th>Номер заказа</th>
+          <th>Дата заказа</th>
+          <th>Дата доставки</th>
+          <th>Изделия</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+          <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.order_date }}</td>
+            <td>{{ order.delivery_date }}</td>
+            <td>
+              <ul>
+                {% for item in order.orderitem_set.all %}
+                  <li>{{ item.product.name }} — {{ item.quantity }} шт.</li>
+                {% endfor %}
+              </ul>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Нет заказов.</p>
+  {% endif %}
+{% endblock %}
+</body>
+</html>

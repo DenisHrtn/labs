@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+<h1>Список заказчиков по городам</h1>
+
+{% for city, customers in customers_by_city.items %}
+  <h2>{{ city }}</h2>
+  <ul>
+    {% for customer in customers %}
+      <li>
+        {{ customer.name }} — {{ customer.phone }} — {{ customer.address }}
+      </li>
+    {% endfor %}
+  </ul>
+{% empty %}
+  <p>Нет заказчиков.</p>
+{% endfor %}
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+<h2>Годовой отчет поступлений от продаж</h2>
+
+<canvas id="revenueChart" width="800" height="400"></canvas>
+
+<table>
+    <thead>
+        <tr>
+            <th>Год</th>
+            <th>Сумма продаж (BYN)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in revenue_by_year %}
+        <tr>
+            <td>{{ row.year }}</td>
+            <td>{{ row.total_revenue|floatformat:2 }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('revenueChart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ chart_labels|safe }},
+            datasets: [{
+                label: 'Доход по годам',
+                data: {{ chart_data|safe }},
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: true,
+                tension: 0.3
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}
+</body>
+</html>

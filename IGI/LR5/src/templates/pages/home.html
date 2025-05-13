@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Главная</title>
+</head>
+<body>
+  <h1>Добро пожаловать, {{ request.user.email }}!</h1>
+
+  <p>Ваша роль:</p>
+  <ul>
+    {% if request.user.is_superuser %}
+      <li>Суперпользователь</li>
+    {% elif request.user.is_client %}
+      <li>Клиент</li>
+    {% elif request.user.is_customer %}
+      <li>Пользователь</li>
+    {% else %}
+      <li>Неопределена</li>
+    {% endif %}
+  </ul>
+
+  <a href="{% url 'logout' %}">Выйти</a>
+</body>
+</html>
