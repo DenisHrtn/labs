@@ -5,16 +5,18 @@
     <title>Title</title>
 </head>
 <body>
+    {% extends 'base.html' %}
+    {% block content %}
     <h1>Оформить заказ</h1>
     <form method="post">
-    {% csrf_token %}
-    {{ order_form.as_p }}
-    {{ formset.management_form }}
-    {% for form in formset %}
-    {{ form.as_p }}
-    {% endfor %}
-    <button type="submit">Оформить</button>
-</form>
-
+        {% csrf_token %}
+        {{ order_form.as_p }}
+        {{ formset.management_form }}
+        {% for form in formset %}
+            {{ form.as_p }}
+        {% endfor %}
+        <button type="submit">Оформить</button>
+    </form>
+    {% endblock %}
 </body>
 </html>

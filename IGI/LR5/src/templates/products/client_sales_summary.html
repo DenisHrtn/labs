@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Сводка по клиентам</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+{% extends 'base.html' %}
 {% block content %}
 <h2>Сводная таблица по заказам клиентов</h2>
 
@@ -29,24 +31,43 @@
     </tbody>
 </table>
 
-<!-- Диаграмма -->
 <h3>Объем продаж по клиентам</h3>
 <canvas id="clientChart" width="400" height="200"></canvas>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const ctx = document.getElementById('clientChart').getContext('2d');
-    const clientChart = new Chart(ctx, {
+    const labels = {{ chart_labels|safe }};
+    const data = {{ chart_data|safe }};
+
+    function getRandomColor(opacity = 0.6) {
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+    }
+
+    const backgroundColors = data.map(() => getRandomColor(0.6));
+    const borderColors = backgroundColors.map(color => color.replace(/0\.6\)/, '1)'));
+
+    new Chart(document.getElementById('clientChart'), {
         type: 'bar',
         data: {
-            labels: {% for row in client_summary %} '{{ row.order__customer__name }}', {% endfor %},
+            labels: labels,
             datasets: [{
                 label: 'Объем продаж (шт)',
-                data: {% for row in client_summary %} {{ row.total_quantity }}, {% endfor %},
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                fill: true
+                data: data,
+                backgroundColor: backgroundColors,
+                borderColor: borderColors,
+                borderWidth: 1
             }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    precision: 0
+                }
+            }
         }
     });
 </script>

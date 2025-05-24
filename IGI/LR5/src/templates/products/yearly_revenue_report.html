@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+{% extends 'base.html' %}
 {% block content %}
 <h2>Годовой отчет поступлений от продаж</h2>
 
@@ -31,7 +32,7 @@
 <script>
     const ctx = document.getElementById('revenueChart').getContext('2d');
     const chart = new Chart(ctx, {
-        type: 'line',
+        type: 'bar',
         data: {
             labels: {{ chart_labels|safe }},
             datasets: [{
@@ -52,6 +53,8 @@
             }
         }
     });
+    console.log("labels", {{ chart_labels|safe }});
+    console.log("data", {{ chart_data|safe }});
 </script>
 {% endblock %}
 </body>

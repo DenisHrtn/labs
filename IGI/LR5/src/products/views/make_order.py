@@ -4,10 +4,15 @@ from django.shortcuts import redirect
 
 from products.models import OrderItem
 from products.forms.orders_form import OrderForm, OrderItemForm
+from common_services.permissions.login_permissions import login_required_redirect
 
 
+@login_required_redirect
 def make_order(request):
     OrderItemFormSet = formset_factory(OrderItemForm, extra=1)
+
+    if request.user.is_superuser:
+        return redirect('dashboard')
 
     if request.method == 'POST':
         order_form = OrderForm(request.POST)
@@ -20,7 +25,7 @@ def make_order(request):
                 quantity = form.cleaned_data.get('quantity')
                 if product and quantity:
                     OrderItem.objects.create(order=order, product=product, quantity=quantity)
-            return redirect('product_list')  # или на страницу заказа
+            return redirect('dashboard')
 
     else:
         order_form = OrderForm()

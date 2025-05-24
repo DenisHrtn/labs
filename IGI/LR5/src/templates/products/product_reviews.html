@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Отзывы о мебели</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <h2>Оставить отзыв</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+
+    <h3>Все отзывы</h3>
+    <ul>
+        {% for review in reviews %}
+        <li>
+            <strong>{{ review.product.name }}</strong> – {{ review.rating }}/5<br>
+            <em>{{ review.comment }}</em><br>
+            <small>от {{ review.user.email }}, {{ review.created_at|date:"d.m.Y H:i" }}</small>
+        </li>
+        {% empty %}
+        <p>Пока нет отзывов.</p>
+        {% endfor %}
+    </ul>
+    {% endblock %}
+</body>
+</html>

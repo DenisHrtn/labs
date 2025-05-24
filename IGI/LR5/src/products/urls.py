@@ -7,6 +7,8 @@ from .views.price_list import price_list_view
 from .views.monthly_sales_by_category import monthly_sales_by_category_view
 from .views.yearly_revenue_report import yearly_revenue_report_view
 from .views.client_sales_summary import client_sales_summary
+from .views.review import product_reviews_view
+from .views.promo import promo_list_view
 
 urlpatterns = [
     path('', product_list, name='product_list'),
@@ -17,4 +19,6 @@ urlpatterns = [
     path('monthly-sales/', monthly_sales_by_category_view, name='monthly_sales'),
     path('yearly-revenue/', yearly_revenue_report_view, name='yearly_revenue'),
     path('client-sales/', client_sales_summary, name='client_sales'),
+    path('reviews/', product_reviews_view, name='product_reviews'),
+    path('promo/', promo_list_view, name='promo_list'),
 ]
