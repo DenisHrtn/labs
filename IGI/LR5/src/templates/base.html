@@ -6,21 +6,75 @@
     <style>
         .dashboard-link {
             display: inline-block;
-            margin: 20px;
+            margin-left: 5px;
             padding: 10px 15px;
             background-color: #007BFF;
             color: white;
             text-decoration: none;
             border-radius: 5px;
         }
-
         .dashboard-link:hover {
             background-color: #0056b3;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 5px 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+        }
+
+        .user-info {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <a href="{% url 'dashboard' %}" class="dashboard-link">Назад к дашборду</a>
+
+    <a href="{% url 'dashboard' %}" class="dashboard-link">На главную</a>
+
+    <nav>
+        <ul>
+            {% if user.is_superuser %}
+                <li><a href="{% url 'all_orders' %}">💡 Управление заказами</a></li>
+                <li><a href="{% url 'most_popular_products' %}">🔥 Популярные продукты</a></li>
+                <li><a href="{% url 'unpopular_products' %}">🧊 Непопулярные продукты</a></li>
+                <li><a href="{% url 'price_list' %}">💰 Прайс-лист</a></li>
+                <li><a href="{% url 'monthly_sales' %}">📈 Продажи по категориям (месяц)</a></li>
+                <li><a href="{% url 'yearly_revenue' %}">💼 Годовой доход</a></li>
+                <li><a href="{% url 'client_sales' %}">👤 Продажи клиентов</a></li>
+                <li><a href="{% url 'customers_by_city' %}">🏙️ Покупатели по городам</a></li>
+                <li>-----------------------------------------------------------------</li>
+            {% endif %}
+            <li><a href="{% url 'news_list' %}">👀 Новости</a></li>
+            <li><a href="{% url 'vacancy_list' %}">🎰 Вакансии</a></li>
+            <li><a href="{% url 'cat_fact' %}">🐈 Факт о котах</a></li>
+            <li><a href="{% url 'nationalize' %}">🌍 Национальность по имени</a></li>
+            <li><a href="{% url 'promo_list'  %}">🍀 Промокоды</a> </li>
+            <li><a href="{% url 'product_reviews' %}">👎 Отзывы</a> </li>
+            <li><a href="{% url 'product_list' %}">📦 Каталог</a></li>
+            <li><a href="{% url 'make_order' %}">🛒 Оформить заказ</a></li>
+            <li><a href="{% url 'price_list' %}">💰 Прайс-лист</a></li>
+            <li><a href="{% url 'search_products' %}">🔍 Поиск продукта</a></li>
+            <li><a href="{% url 'faq' %}">❓ FAQ</a></li>
+        </ul>
+    </nav>
+
+    <div class="user-info">
+        {% if user.is_authenticated %}
+            <p>Вы вошли как {{ user.email }} — <a href="{% url 'logout' %}">Выйти</a></p>
+        {% else %}
+            <a href="{% url 'login' %}">Войти</a> | <a href="{% url 'register' %}">Регистрация</a>
+        {% endif %}
+    </div>
+
+    <hr>
 
     {% block content %}
     {% endblock %}

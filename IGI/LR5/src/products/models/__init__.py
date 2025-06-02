@@ -5,3 +5,6 @@ from .product_category import ProductCategory
 from .product_model import ProductModel
 from .review import Review
 from .promo_code import PromoCode
+from .vacancy import Vacancy
+from .news import News
+from .faq import FAQ

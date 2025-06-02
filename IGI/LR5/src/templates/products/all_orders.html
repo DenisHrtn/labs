@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Все заказы{% endblock %}
+
+    {% block content %}
+    <h1>Список заказов</h1>
+
+    {% if orders %}
+        <ul>
+            {% for order in orders %}
+                <li>
+                    Заказ #{{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }} —
+                    {{ order.customer.name }} ({{ order.customer.user.email }})
+                    |
+                    <a href="{% url 'delete_order' order.id %}">Удалить</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Заказов нет.</p>
+    {% endif %}
+    {% endblock %}

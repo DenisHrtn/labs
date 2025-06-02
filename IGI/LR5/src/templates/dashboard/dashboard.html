@@ -1,38 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Дашборд</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Дашборд{% endblock %}
+
 {% block content %}
 <h1>{{ title }}</h1>
 
-<nav style="margin-bottom: 20px;">
-  <ul style="list-style: none; padding: 0;">
-    <li><a href="{% url 'promo_list'  %}">🍀 Промокоды</a> </li>
-    <li><a href="{% url 'product_reviews' %}">👎 Отзывы</a> </li>
-    <li><a href="{% url 'product_list' %}">📦 Список продуктов</a></li>
-    <li><a href="{% url 'make_order' %}">🛒 Оформить заказ</a></li>
-    <li><a href="{% url 'most_popular_products' %}">🔥 Популярные продукты</a></li>
-    <li><a href="{% url 'unpopular_products' %}">🧊 Непопулярные продукты</a></li>
-    <li><a href="{% url 'price_list' %}">💰 Прайс-лист</a></li>
-    <li><a href="{% url 'monthly_sales' %}">📈 Продажи по категориям (месяц)</a></li>
-    <li><a href="{% url 'yearly_revenue' %}">💼 Годовой доход</a></li>
-    <li><a href="{% url 'client_sales' %}">👤 Продажи клиентов</a></li>
-    <li><a href="{% url 'customers_by_city' %}">🏙️ Покупатели по городам</a></li>
-  </ul>
-</nav>
-
-<div style="margin-top: 20px;">
-  {% if user.is_authenticated %}
-    <p>Вы вошли как {{ user.email }} — <a href="{% url 'logout' %}">Выйти</a></p>
-  {% else %}
-    <a href="{% url 'login' %}">Войти</a> | <a href="{% url 'register' %}">Регистрация</a>
-  {% endif %}
+{% if latest_news %}
+<div style="
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: #f0f8ff;
+    padding: 15px;
+    border: 2px solid #007BFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+">
+    <h3 style="margin-top: 0;">📰 Новость</h3>
+    <strong>{{ latest_news.title }}</strong>
+    <p>{{ latest_news.content|truncatewords:20 }}</p>
+    <small style="color: #555;">{{ latest_news.published_at|date:"d.m.Y H:i" }}</small><br>
+    <a href="{% url 'news_list' %}" style="color: #007BFF;">Читать все →</a>
 </div>
+{% endif %}
 
-<hr>
 {% if user.is_authenticated %}
   <h2>Ваши заказы:</h2>
   {% if orders %}
@@ -68,7 +60,4 @@
 {% else %}
   <p>Чтобы увидеть историю заказов, пожалуйста, <a href="{% url 'login' %}">войдите</a> в систему.</p>
 {% endif %}
-
 {% endblock %}
-</body>
-</html>

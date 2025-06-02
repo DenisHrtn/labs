@@ -1,27 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Промокоды</title>
-</head>
-<body>
-    {% extends "base.html" %}
-    {% block content %}
-    <h2>Доступные промокоды и купоны</h2>
+{% extends "base.html" %}
+{% block title %}Промокоды{% endblock %}
 
-    {% if promos %}
-    <ul>
-        {% for promo in promos %}
-        <li>
-            <strong>{{ promo.code }}</strong> – {{ promo.discount_percent }}% скидка<br>
-            {{ promo.description }}<br>
-            <small>Действует с {{ promo.valid_from }} по {{ promo.valid_to }}</small>
-        </li>
-        {% endfor %}
-    </ul>
-    {% else %}
-        <p>На данный момент нет активных промокодов.</p>
-    {% endif %}
-    {% endblock %}
-</body>
-</html>
+{% block content %}
+<h2>Доступные промокоды и купоны</h2>
+
+{% if promos %}
+<ul>
+    {% for promo in promos %}
+    <li>
+        <strong>{{ promo.code }}</strong> – {{ promo.discount_percent }}% скидка<br>
+        {{ promo.description }}<br>
+        <small>Действует с {{ promo.valid_from }} по {{ promo.valid_to }}</small>
+
+        {% if request.user.is_staff %}
+        <form method="post" style="display:inline;">
+            {% csrf_token %}
+            <input type="hidden" name="promo_id" value="{{ promo.id }}">
+            <button type="submit" onclick="return confirm('Удалить промокод {{ promo.code }}?')">Удалить</button>
+        </form>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+    <p>На данный момент нет активных промокодов.</p>
+{% endif %}
+
+{% if request.user.is_staff %}
+<hr>
+<h3>Создать новый промокод</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Создать</button>
+</form>
+{% endif %}
+
+{% endblock %}

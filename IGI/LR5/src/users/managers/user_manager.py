@@ -49,6 +49,17 @@ class UserManager(BaseUserManager):
         return user
 
     @atomic
+    def create_user(self, email: str, password: Optional[str] = None, **extra_fields: Any) -> AbstractBaseUser:
+        """
+        Creates and saves a regular user with the given email and password.
+        """
+        extra_fields.setdefault('is_active', True)
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        extra_fields.setdefault('is_blocked', False)
+        return self._create_user(email, password, **extra_fields)
+
+    @atomic
     def create_customer(self, email: str, password: Optional[str] = None, **extra_fields: Any) -> AbstractBaseUser:
         """
         :param email:

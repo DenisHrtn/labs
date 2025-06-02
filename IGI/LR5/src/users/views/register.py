@@ -8,7 +8,7 @@ def register_view(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('login')
     else:
         form = RegisterForm()
 

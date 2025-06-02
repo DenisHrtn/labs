@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Сводка по клиентам</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
 {% extends 'base.html' %}
+{% block title %}Сумма заказов клиентов{% endblock %}
+
 {% block content %}
 <h2>Сводная таблица по заказам клиентов</h2>
 
@@ -72,5 +66,3 @@
     });
 </script>
 {% endblock %}
-</body>
-</html>

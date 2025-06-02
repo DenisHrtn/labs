@@ -24,7 +24,8 @@ def make_order(request):
                 product = form.cleaned_data.get('product')
                 quantity = form.cleaned_data.get('quantity')
                 if product and quantity:
-                    OrderItem.objects.create(order=order, product=product, quantity=quantity)
+                    order_item = OrderItem.objects.create(order=order, product=product, quantity=quantity)
+                    order_item.save()
             return redirect('dashboard')
 
     else:

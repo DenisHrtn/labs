@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 {% extends 'base.html' %}
+{% block title %}Годовой отчет поступлений от продаж{% endblock %}
+
 {% block content %}
 <h2>Годовой отчет поступлений от продаж</h2>
 
@@ -57,5 +52,3 @@
     console.log("data", {{ chart_data|safe }});
 </script>
 {% endblock %}
-</body>
-</html>

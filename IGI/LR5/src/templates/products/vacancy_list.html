@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Вакансии{% endblock %}
+
+{% block content %}
+<h1>Открытые вакансии</h1>
+
+{% if vacancies %}
+    <ul>
+        {% for vacancy in vacancies %}
+            <li>
+                <h2>{{ vacancy.title }}</h2>
+                <p>{{ vacancy.description }}</p>
+                <small>Опубликовано: {{ vacancy.published_at|date:"d.m.Y H:i" }}</small><br>
+
+                {% if request.user.is_staff %}
+                    <a href="{% url 'vacancy_edit' vacancy.pk %}">✏️ Редактировать</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Вакансий пока нет.</p>
+{% endif %}
+{% endblock %}

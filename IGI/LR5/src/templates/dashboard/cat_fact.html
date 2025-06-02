@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Факт о котах{% endblock %}
+{% block content %}
+<h1>Случайный факт о котах</h1>
+
+{% if fact %}
+<p><strong>Факт:</strong> {{ fact }}</p>
+{% else %}
+<p>Не удалось получить факт о котах.</p>
+{% endif %}
+{% endblock %}
