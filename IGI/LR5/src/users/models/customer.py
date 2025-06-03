@@ -9,4 +9,5 @@ class Customer(AuditMixin):
     phone = models.CharField(max_length=30)
     city = models.CharField(max_length=100)
     address = models.TextField()
+    image = models.ImageField(upload_to='customer_avatars/', blank=True, null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)

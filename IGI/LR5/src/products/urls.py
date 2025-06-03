@@ -16,6 +16,7 @@ from .views.news import news_list
 from .views.news_detail import news_detail
 from .views.faq_view import faq_view
 from .views.vacancy_edit_view import vacancy_edit_view
+from .views.customers_contacts import customer_contacts_view
 
 urlpatterns = [
     path('', product_list, name='product_list'),
@@ -36,4 +37,5 @@ urlpatterns = [
     path('news/<int:pk>/', news_detail, name='news_detail'),
     path('faq/', faq_view, name='faq'),
     path('vacancies/<int:pk>/edit/', vacancy_edit_view, name='vacancy_edit'),
+    path('customer-contacts/', customer_contacts_view, name='customer_contacts'),
 ]
