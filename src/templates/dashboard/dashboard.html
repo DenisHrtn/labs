@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% block title %}Главная - Мебельный магазин{% endblock %}
+{% block description %}Добро пожаловать в наш мебельный магазин! Широкий ассортимент качественной мебели по доступным ценам.{% endblock %}
+
+{% block content %}
+<header>
+  <h1>{{ title }}</h1>
+  <p>Добро пожаловать в наш интернет-магазин мебели!</p>
+</header>
+
+{% if company %}
+<section aria-labelledby="logo" class="card">
+  <h2 id="logo" class="visually-hidden">Логотип компании</h2>
+  {% if company.logo %}
+    <img src="{{ company.logo.url }}" alt="Логотип {{ company.name }}" style="max-width:160px;height:auto;border-radius:10px;">
+  {% endif %}
+  <p><strong>{{ company.name }}</strong> - ваш надежный партнер в мире мебели</p>
+</section>
+{% endif %}
+
+<section aria-labelledby="banners" class="card">
+  <h2 id="banners">Наши преимущества</h2>
+  <div class="grid">
+    <figure class="card">
+      <img src="/media/news_images/Доставка.png" alt="Баннер доставка" style="max-width:100%;height:auto;border-radius:10px;">
+      <figcaption><strong>Быстрая доставка</strong><br>Доставляем мебель в день заказа</figcaption>
+    </figure>
+    <figure class="card">
+      <img src="/media/news_images/Обновление_саита.jpg" alt="Баннер обновления" style="max-width:100%;height:auto;border-radius:10px;">
+      <figcaption><strong>Постоянные обновления</strong><br>Новые модели каждую неделю</figcaption>
+    </figure>
+  </div>
+  <p><abbr title="Search Engine Optimization">SEO</abbr> оптимизация для лучшего поиска в интернете.</p>
+</section>
+
+{% if latest_news %}
+<aside class="card" style="background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%); border-left: 4px solid #667eea;">
+    <h3>📰 Последние новости</h3>
+    <article>
+        <header>
+            <h4>{{ latest_news.title }}</h4>
+            <time datetime="{{ latest_news.published_at|date:'c' }}">{{ latest_news.published_at|date:"d.m.Y H:i" }}</time>
+        </header>
+        <p>{{ latest_news.content|truncatewords:20 }}</p>
+        <footer>
+            <a href="{% url 'news_list' %}" class="btn">Читать все новости →</a>
+        </footer>
+    </article>
+</aside>
+{% endif %}
+
+<nav aria-label="Быстрая навигация по разделам" class="card">
+  <h2>Быстрая навигация</h2>
+  <ul style="display: flex; gap: 1rem; flex-wrap: wrap;">
+    <li><a href="#catalog" class="btn">📦 Каталог</a></li>
+    <li><a href="#partners" class="btn">🤝 Партнёры</a></li>
+    <li><a href="#news" class="btn">📰 Новости</a></li>
+  </ul>
+</nav>
+
+<section id="catalog" aria-labelledby="catalog-title" class="card">
+  <h2 id="catalog-title">Популярные товары</h2>
+  <div class="grid">
+    {% for p in featured_products %}
+      <article class="card">
+        <header>
+          <h3><a href="{% url 'product_detail' p.pk %}">{{ p.name }}</a></h3>
+        </header>
+        <p><strong>Цена:</strong> {{ p.price }} BYN</p>
+        <p><strong>Категория:</strong> {{ p.category.name }}</p>
+        <footer>
+          <a href="{% url 'product_detail' p.pk %}" class="btn">Подробнее</a>
+        </footer>
+      </article>
+    {% empty %}
+      <p>Товары пока не добавлены.</p>
+    {% endfor %}
+  </div>
+  <p><a href="{% url 'product_list' %}" class="btn btn-success">Открыть весь каталог →</a></p>
+</section>
+
+<section id="news" aria-labelledby="news-title" class="card">
+  <h2 id="news-title">Последняя статья</h2>
+  {% if latest_news %}
+    <article>
+      <header>
+        <h3>{{ latest_news.title }}</h3>
+        <time datetime="{{ latest_news.published_at|date:'c' }}">{{ latest_news.published_at|date:"d.m.Y H:i" }}</time>
+      </header>
+      <p>{{ latest_news.content|truncatewords:24 }}</p>
+      <footer>
+        <a href="{% url 'news_detail' latest_news.pk %}" class="btn">Читать далее</a>
+      </footer>
+    </article>
+  {% else %}
+    <p>Статьи ещё не опубликованы.</p>
+  {% endif %}
+</section>
+
+<section id="partners" aria-labelledby="partners-title" class="card">
+  <h2 id="partners-title">Наши партнёры</h2>
+  <div class="grid">
+    {% for partner in partners %}
+    <article class="card">
+      {% if partner.logo %}
+        <img src="{{ partner.logo.url }}" alt="Логотип {{ partner.name }}" style="max-width:120px;height:auto;border-radius:8px;">
+      {% endif %}
+      <h3>
+        {% if partner.website %}
+          <a href="{{ partner.website }}" target="_blank" rel="noopener">{{ partner.name }}</a>
+        {% else %}
+          {{ partner.name }}
+        {% endif %}
+      </h3>
+    </article>
+    {% empty %}
+      <p>Партнёры пока не добавлены.</p>
+    {% endfor %}
+  </div>
+</section>
+
+{% if user.is_authenticated %}
+<section class="card">
+  <h2>Ваши заказы</h2>
+  {% if orders %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Номер заказа</th>
+          <th scope="col">Дата заказа</th>
+          <th scope="col">Дата доставки</th>
+          <th scope="col">Товары</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+          <tr>
+            <td><strong>#{{ order.id }}</strong></td>
+            <td><time datetime="{{ order.order_date|date:'c' }}">{{ order.order_date }}</time></td>
+            <td><time datetime="{{ order.delivery_date|date:'c' }}">{{ order.delivery_date }}</time></td>
+            <td>
+              <ul>
+                {% for item in order.orderitem_set.all %}
+                  <li><strong>{{ item.product.name }}</strong> — {{ item.quantity }} шт.</li>
+                {% endfor %}
+              </ul>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <div class="alert alert-success">
+      <p>У вас пока нет заказов. <a href="{% url 'product_list' %}" class="btn">Начать покупки</a></p>
+    </div>
+  {% endif %}
+</section>
+{% else %}
+<section class="card">
+  <div class="alert alert-success">
+    <p>Чтобы увидеть историю заказов, пожалуйста, <a href="{% url 'login' %}" class="btn">войдите</a> в систему.</p>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

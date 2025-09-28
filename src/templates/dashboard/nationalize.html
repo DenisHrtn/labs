@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Национальность по имени{% endblock %}
+
+{% block content %}
+<h1>Угадай страну по имени</h1>
+
+<form method="get">
+    <label for="name">Введите имя:</label>
+    <input type="text" name="name" id="name" placeholder="Например, Dzianis" required>
+    <button type="submit">Определить</button>
+</form>
+
+{% if name %}
+<h2>Результаты для имени: {{ name }}</h2>
+{% if countries %}
+<ul>
+    {% for country in countries %}
+    <li>Страна: {{ country.country_id }} — вероятность: {{ country.probability|floatformat:2 }}%</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Страны не найдены.</p>
+{% endif %}
+{% endif %}
+{% endblock %}

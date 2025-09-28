@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Сумма заказов клиентов{% endblock %}
+
+{% block content %}
+<h2>Сводная таблица по заказам клиентов</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Клиент</th>
+            <th>Город</th>
+            <th>Объем (шт)</th>
+            <th>Сумма (BYN)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in client_summary %}
+        <tr>
+            <td>{{ row.order__customer__name }}</td>
+            <td>{{ row.order__customer__city }}</td>
+            <td>{{ row.total_quantity }}</td>
+            <td>{{ row.total_spent|floatformat:2 }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Объем продаж по клиентам</h3>
+<canvas id="clientChart" width="400" height="200"></canvas>
+
+<script>
+    const labels = {{ chart_labels|safe }};
+    const data = {{ chart_data|safe }};
+
+    function getRandomColor(opacity = 0.6) {
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+    }
+
+    const backgroundColors = data.map(() => getRandomColor(0.6));
+    const borderColors = backgroundColors.map(color => color.replace(/0\.6\)/, '1)'));
+
+    new Chart(document.getElementById('clientChart'), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Объем продаж (шт)',
+                data: data,
+                backgroundColor: backgroundColors,
+                borderColor: borderColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    precision: 0
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

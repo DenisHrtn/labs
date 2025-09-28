@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}О компании - Мебельный магазин{% endblock %}
+{% block description %}Узнайте больше о нашей компании, истории развития, сертификатах и команде профессионалов.{% endblock %}
+
+{% block content %}
+<header>
+    <h1>О нашей компании</h1>
+    <p>Добро пожаловать в мир качественной мебели</p>
+</header>
+
+{% if company %}
+<section class="card">
+    <header>
+        <h2>О нас</h2>
+        {% if company.logo %}
+            <img src="{{ company.logo.url }}" alt="Логотип {{ company.name }}" style="max-width:200px; height:auto; border-radius:10px; margin: 1rem 0;">
+        {% endif %}
+        <h3>{{ company.name }}</h3>
+    </header>
+    
+    <article>
+        <p>{{ company.description }}</p>
+    </article>
+</section>
+
+{% if company.video_url %}
+<section class="card">
+    <h2>Видео о компании</h2>
+    <div style="text-align: center;">
+        <video width="100%" height="auto" controls style="max-width: 800px; border-radius: 10px;">
+            <source src="/media/video/test.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+    </div>
+</section>
+{% endif %}
+
+<section class="card">
+    <h2>История компании</h2>
+    <div class="timeline">
+        {% for event in company.history.all %}
+        <article class="card">
+            <header>
+                <time datetime="{{ event.year }}">{{ event.year }}</time>
+            </header>
+            <p>{{ event.event }}</p>
+        </article>
+        {% empty %}
+        <p>История пока не заполнена.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="card">
+    <h2>Реквизиты компании</h2>
+    <div class="alert alert-success">
+        <pre style="white-space: pre-wrap; font-family: inherit;">{{ company.requisites }}</pre>
+    </div>
+</section>
+
+<section class="card">
+    <h2>Сертификаты и лицензии</h2>
+    <blockquote style="background: #f8f9fa; padding: 1rem; border-left: 4px solid #667eea; border-radius: 8px;">
+        {{ company.certificate_text }}
+    </blockquote>
+</section>
+
+<section class="card">
+    <h2>Аудио приветствие</h2>
+    <div style="text-align: center;">
+        <audio controls style="width: 100%; max-width: 500px;">
+            <source src="/media/mp3/helicopter-helicopter-parakofer-parakofer.mp3" type="audio/mpeg">
+            Ваш браузер не поддерживает аудио.
+        </audio>
+        <p><em>Послушайте приветственное сообщение от нашей команды</em></p>
+    </div>
+</section>
+
+{% else %}
+<section class="card">
+    <div class="alert alert-success">
+        <p>Информация о компании пока не добавлена. Мы работаем над наполнением этого раздела.</p>
+    </div>
+</section>
+{% endif %}
+
+<section class="card">
+    <h2>Наши преимущества</h2>
+    <div class="grid">
+        <article class="card">
+            <h3>🏆 Качество</h3>
+            <p>Мы используем только качественные материалы и проверенных поставщиков</p>
+        </article>
+        <article class="card">
+            <h3>🚚 Доставка</h3>
+            <p>Быстрая и надежная доставка по всей стране</p>
+        </article>
+        <article class="card">
+            <h3>💬 Поддержка</h3>
+            <p>Квалифицированная поддержка клиентов 24/7</p>
+        </article>
+        <article class="card">
+            <h3>💰 Цены</h3>
+            <p>Доступные цены без переплат</p>
+        </article>
+    </div>
+</section>
+{% endblock %}
+

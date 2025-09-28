@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Ежемесячный объём продаж по категориям{% endblock %}
+
+{% block content %}
+<h2>Ежемесячный объём продаж по категориям</h2>
+
+<canvas id="salesChart" width="800" height="400"></canvas>
+
+<table>
+    <thead>
+        <tr>
+            <th>Месяц</th>
+            <th>Категория</th>
+            <th>Кол-во продано</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in sales_data %}
+        <tr>
+            <td>{{ row.month|date:"Y-m" }}</td>
+            <td>{{ row.product__category__name }}</td>
+            <td>{{ row.total_quantity }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const labels = {{ chart_labels|safe }};
+    const datasets = {{ chart_datasets|safe }}.map(ds => ({
+        ...ds,
+        backgroundColor: getRandomColor()
+    }));
+
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    const salesChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+        scales: {
+            x: {
+                stacked: false
+            },
+            y: {
+                stacked: false,
+                beginAtZero: true
+            }
+        }
+    }
+    });
+
+    function getRandomColor() {
+        return 'rgba(' +
+            Math.floor(Math.random() * 255) + ',' +
+            Math.floor(Math.random() * 255) + ',' +
+            Math.floor(Math.random() * 255) + ',0.6)';
+    }
+</script>
+{% endblock %}

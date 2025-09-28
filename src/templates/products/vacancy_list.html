@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block title %}Вакансии - Мебельный магазин{% endblock %}
+{% block description %}Присоединяйтесь к нашей команде! Актуальные вакансии в мебельной компании. Работа в дружном коллективе с перспективами роста.{% endblock %}
+
+{% block content %}
+<header>
+    <h1>🎯 Открытые вакансии</h1>
+    <p>Присоединяйтесь к нашей команде профессионалов</p>
+</header>
+
+<section class="card">
+    {% if vacancies %}
+        <div class="grid">
+            {% for vacancy in vacancies %}
+                <article class="card">
+                    <header>
+                        <h2>{{ vacancy.title }}</h2>
+                        <time datetime="{{ vacancy.published_at|date:'c' }}">Опубликовано: {{ vacancy.published_at|date:"d.m.Y H:i" }}</time>
+                    </header>
+                    
+                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                        <p>{{ vacancy.description }}</p>
+                    </div>
+                    
+                    <footer>
+                        {% if request.user.is_staff %}
+                            <a href="{% url 'vacancy_edit' vacancy.pk %}" class="btn btn-secondary">✏️ Редактировать</a>
+                        {% endif %}
+                        <a href="mailto:hr@furniture-shop.by?subject=Отклик на вакансию: {{ vacancy.title }}" class="btn btn-success">📧 Откликнуться</a>
+                    </footer>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-success">
+            <p>В данный момент открытых вакансий нет. Но мы всегда рады талантливым людям!</p>
+        </div>
+    {% endif %}
+</section>
+
+<section class="card">
+    <h2>Почему работать у нас?</h2>
+    <div class="grid">
+        <article class="card">
+            <h3>💼 Стабильность</h3>
+            <p>Надежная компания с многолетней историей</p>
+        </article>
+        <article class="card">
+            <h3>📈 Развитие</h3>
+            <p>Возможности карьерного роста и обучения</p>
+        </article>
+        <article class="card">
+            <h3>👥 Команда</h3>
+            <p>Дружный коллектив профессионалов</p>
+        </article>
+        <article class="card">
+            <h3>💰 Доход</h3>
+            <p>Конкурентная заработная плата и бонусы</p>
+        </article>
+    </div>
+</section>
+
+<section class="card">
+    <h2>Как откликнуться?</h2>
+    <div class="grid">
+        <article class="card">
+            <h3>📧 Email</h3>
+            <p>Отправьте резюме на <a href="mailto:hr@furniture-shop.by">hr@furniture-shop.by</a></p>
+        </article>
+        <article class="card">
+            <h3>📞 Телефон</h3>
+            <p>Звоните по номеру <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+        </article>
+        <article class="card">
+            <h3>🏢 Офис</h3>
+            <p>Приходите лично в наш офис</p>
+        </article>
+    </div>
+</section>
+
+<section class="card">
+    <h2>Отправить резюме</h2>
+    <form method="post" enctype="multipart/form-data" class="form-group">
+        {% csrf_token %}
+        <div class="grid">
+            <div class="form-group">
+                <label for="name">Имя:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="phone">Телефон:</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+            <label for="position">Желаемая должность:</label>
+            <input type="text" id="position" name="position" required>
+        </div>
+        <div class="form-group">
+            <label for="resume">Резюме (PDF):</label>
+            <input type="file" id="resume" name="resume" accept=".pdf" required>
+        </div>
+        <div class="form-group">
+            <label for="cover_letter">Сопроводительное письмо:</label>
+            <textarea id="cover_letter" name="cover_letter" rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">📤 Отправить заявку</button>
+    </form>
+</section>
+{% endblock %}

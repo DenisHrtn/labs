@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Мебель, не пользующаяся спросом{% endblock %}
+
+{% block content %}
+<h2>Мебель, не пользующаяся спросом</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Модель</th>
+            <th>Цена</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.model }}</td>
+            <td>{{ product.price }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3">Все товары были заказаны</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

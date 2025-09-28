@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %}Промокоды и скидки - Мебельный магазин{% endblock %}
+{% block description %}Специальные предложения и промокоды на мебель. Экономьте на покупках с нашими эксклюзивными скидками!{% endblock %}
+
+{% block content %}
+<header>
+    <h1>🎁 Промокоды и скидки</h1>
+    <p>Специальные предложения для наших клиентов</p>
+</header>
+
+<section class="card">
+    <h2>Активные промокоды</h2>
+    {% if promos %}
+        <div class="grid">
+            {% for promo in promos %}
+            <article class="card" style="border: 2px solid #667eea; background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);">
+                <header>
+                    <h3 style="color: #667eea; font-size: 1.5rem;">{{ promo.code }}</h3>
+                    <div style="background: #667eea; color: white; padding: 0.5rem; border-radius: 8px; display: inline-block; font-weight: bold;">
+                        {{ promo.discount_percent }}% скидка
+                    </div>
+                </header>
+                
+                <div style="background: white; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                    <p><strong>Описание:</strong> {{ promo.description }}</p>
+                </div>
+                
+                <footer>
+                    <p><strong>Действует:</strong> с {{ promo.valid_from }} по {{ promo.valid_to }}</p>
+                    {% if request.user.is_staff %}
+                        <form method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="promo_id" value="{{ promo.id }}">
+                            <button type="submit" onclick="return confirm('Удалить промокод {{ promo.code }}?')" class="btn btn-secondary">🗑️ Удалить</button>
+                        </form>
+                    {% endif %}
+                </footer>
+            </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-success">
+            <p>На данный момент нет активных промокодов. Следите за обновлениями!</p>
+        </div>
+    {% endif %}
+</section>
+
+{% if request.user.is_staff %}
+<section class="card">
+    <h2>Создать новый промокод</h2>
+    <form method="post" class="form-group">
+        {% csrf_token %}
+        <div class="grid">
+            <div class="form-group">
+                <label for="id_code">Код промокода:</label>
+                {{ form.code }}
+            </div>
+            <div class="form-group">
+                <label for="id_discount_percent">Процент скидки:</label>
+                {{ form.discount_percent }}
+            </div>
+        </div>
+        <div class="grid">
+            <div class="form-group">
+                <label for="id_valid_from">Действует с:</label>
+                {{ form.valid_from }}
+            </div>
+            <div class="form-group">
+                <label for="id_valid_to">Действует до:</label>
+                {{ form.valid_to }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="id_description">Описание:</label>
+            {{ form.description }}
+        </div>
+        <button type="submit" class="btn btn-success">✨ Создать промокод</button>
+    </form>
+</section>
+{% endif %}
+
+<section class="card">
+    <h2>Как использовать промокод?</h2>
+    <div class="grid">
+        <article class="card">
+            <h3>1️⃣ Выберите товары</h3>
+            <p>Добавьте понравившиеся товары в корзину</p>
+        </article>
+        <article class="card">
+            <h3>2️⃣ Введите промокод</h3>
+            <p>Введите код в поле "Промокод" при оформлении заказа</p>
+        </article>
+        <article class="card">
+            <h3>3️⃣ Получите скидку</h3>
+            <p>Скидка автоматически применится к заказу</p>
+        </article>
+    </div>
+</section>
+
+<section class="card">
+    <h2>Условия использования</h2>
+    <ul style="background: #f8f9fa; padding: 1rem; border-radius: 8px;">
+        <li>Промокоды действуют только в указанный период</li>
+        <li>Один промокод можно использовать только один раз</li>
+        <li>Скидки не суммируются с другими предложениями</li>
+        <li>Промокоды не распространяются на товары со скидкой</li>
+        <li>Администрация оставляет за собой право изменить условия</li>
+    </ul>
+</section>
+{% endblock %}

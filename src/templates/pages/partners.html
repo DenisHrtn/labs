@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}Партнёры - Мебельный магазин{% endblock %}
+{% block description %}Наши надежные партнёры и поставщики. Качественная мебель от проверенных производителей.{% endblock %}
+
+{% block content %}
+<header>
+    <h1>🤝 Наши партнёры</h1>
+    <p>Мы сотрудничаем только с проверенными и надежными партнёрами</p>
+</header>
+
+<section class="card">
+    <h2>Партнёрская сеть</h2>
+    {% if partners %}
+        <div class="grid">
+            {% for partner in partners %}
+            <article class="card">
+                <header>
+                    {% if partner.logo %}
+                        <img src="{{ partner.logo.url }}" alt="Логотип {{ partner.name }}" style="max-width:150px;height:auto;border-radius:8px;margin-bottom:1rem;">
+                    {% endif %}
+                    <h3>
+                        {% if partner.website %}
+                            <a href="{{ partner.website }}" target="_blank" rel="noopener">{{ partner.name }}</a>
+                        {% else %}
+                            {{ partner.name }}
+                        {% endif %}
+                    </h3>
+                </header>
+                
+                {% if partner.website %}
+                    <footer>
+                        <a href="{{ partner.website }}" target="_blank" rel="noopener" class="btn">🌐 Посетить сайт</a>
+                    </footer>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-success">
+            <p>Информация о партнёрах пока не добавлена.</p>
+        </div>
+    {% endif %}
+</section>
+
+<section class="card">
+    <h2>Преимущества партнёрства</h2>
+    <div class="grid">
+        <article class="card">
+            <h3>🏆 Качество</h3>
+            <p>Мы работаем только с проверенными поставщиками</p>
+        </article>
+        <article class="card">
+            <h3>🚚 Надёжность</h3>
+            <p>Стабильные поставки и соблюдение сроков</p>
+        </article>
+        <article class="card">
+            <h3>💰 Выгодные условия</h3>
+            <p>Конкурентные цены и гибкие условия сотрудничества</p>
+        </article>
+        <article class="card">
+            <h3>🤝 Доверие</h3>
+            <p>Долгосрочные партнёрские отношения</p>
+        </article>
+    </div>
+</section>
+
+<section class="card">
+    <h2>Стать партнёром</h2>
+    <p>Хотите стать нашим партнёром? Мы всегда открыты для сотрудничества!</p>
+    <div class="grid">
+        <article class="card">
+            <h3>📧 Связаться с нами</h3>
+            <p>Email: <a href="mailto:partners@furniture-shop.by">partners@furniture-shop.by</a></p>
+            <p>Телефон: <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+        </article>
+        <article class="card">
+            <h3>📋 Условия сотрудничества</h3>
+            <ul>
+                <li>Качественная продукция</li>
+                <li>Соблюдение сроков поставки</li>
+                <li>Конкурентные цены</li>
+                <li>Документооборот</li>
+            </ul>
+        </article>
+    </div>
+</section>
+
+<section class="card">
+    <h2>Наши поставщики</h2>
+    <div class="grid">
+        <article class="card">
+            <h3>🏠 Мебель для дома</h3>
+            <p>Диваны, кресла, столы, стулья, шкафы</p>
+        </article>
+        <article class="card">
+            <h3>🏢 Офисная мебель</h3>
+            <p>Рабочие столы, кресла, стеллажи</p>
+        </article>
+        <article class="card">
+            <h3>🛏️ Спальни</h3>
+            <p>Кровати, матрасы, комоды, тумбы</p>
+        </article>
+        <article class="card">
+            <h3>🍽️ Кухни</h3>
+            <p>Кухонные гарнитуры, столешницы, фурнитура</p>
+        </article>
+    </div>
+</section>
+{% endblock %}
+
+

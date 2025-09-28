@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Поиск товаров{% endblock %}
+
+    {% block content %}
+    <h1>Поиск по каталогу</h1>
+
+    <form method="get" action="{% url 'search_products' %}">
+        <input type="text" name="q" placeholder="Введите название товара..." value="{{ query }}">
+        <button type="submit">Искать</button>
+    </form>
+
+    {% if query %}
+        <h2>Результаты по запросу "{{ query }}":</h2>
+        {% if results %}
+            <ul>
+                {% for product in results %}
+                    <li>{{ product.name }} — {{ product.price }} руб.</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Ничего не найдено.</p>
+        {% endif %}
+    {% endif %}
+    {% endblock %}

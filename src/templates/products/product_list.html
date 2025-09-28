@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Каталог товаров - Мебельный магазин{% endblock %}
+{% block description %}Широкий ассортимент качественной мебели: диваны, кресла, столы, стулья и многое другое по доступным ценам.{% endblock %}
+
+{% block content %}
+<header>
+    <h1>Каталог товаров</h1>
+    <p>Выберите мебель для вашего дома из нашего широкого ассортимента</p>
+</header>
+
+<section class="card">
+    <h2>Фильтры</h2>
+    <form method="get" class="form-group">
+        <div class="grid">
+            <div class="form-group">
+                <label for="id_category">Категория:</label>
+                {{ form.category }}
+            </div>
+            <div class="form-group">
+                <label for="id_model">Модель:</label>
+                {{ form.model }}
+            </div>
+        </div>
+        <button type="submit" class="btn">🔍 Фильтровать</button>
+        <a href="{% url 'product_list' %}" class="btn btn-secondary">Сбросить фильтры</a>
+    </form>
+</section>
+
+<section class="card">
+    <h2>Товары</h2>
+    {% if products %}
+        <div class="grid">
+            {% for product in products %}
+            <article class="card">
+                <header>
+                    <h3><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></h3>
+                </header>
+                <div>
+                    <p><strong>Цена:</strong> {{ product.price }} BYN</p>
+                    <p><strong>Категория:</strong> {{ product.category.name }}</p>
+                    <p><strong>Модель:</strong> {{ product.model.name }}</p>
+                    <p><strong>Артикул:</strong> {{ product.product_code }}</p>
+                </div>
+                <footer>
+                    <a href="{% url 'product_detail' product.pk %}" class="btn">Подробнее</a>
+                    <a href="{% url 'add_to_cart' product.pk %}" class="btn btn-success">🛒 В корзину</a>
+                </footer>
+            </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-success">
+            <p>Товары не найдены. Попробуйте изменить фильтры или <a href="{% url 'product_list' %}" class="btn">показать все товары</a></p>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

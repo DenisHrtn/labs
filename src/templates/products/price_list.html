@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Прайс-лист{% endblock %}
+
+{% block content %}
+<h2>Прайс-лист по категориям мебели</h2>
+
+{% for category in categories %}
+    <h3>{{ category.name }}</h3>
+    {% if category.product_set.all %}
+    <table>
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Модель</th>
+                <th>Цена</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in category.product_set.all %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.model.name }}</td>
+                <td>{{ product.price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>Нет товаров в этой категории.</p>
+    {% endif %}
+{% endfor %}
+{% endblock %}

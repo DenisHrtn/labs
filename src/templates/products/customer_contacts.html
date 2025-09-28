@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Контакты заказчиков{% endblock %}
+
+{% block content %}
+<h1>Контакты заказчиков</h1>
+
+{% if customers %}
+    <ul>
+        {% for customer in customers %}
+            <li style="margin-bottom: 20px;">
+                {% if customer.image %}
+                    <img src="{{ customer.image.url }}" alt="{{ customer.user.username }}" width="100" height="100" style="object-fit: cover; border-radius: 50px;">
+                {% endif %}
+                <div>
+                    <strong>{{ customer.user.username }}</strong><br>
+                    Email: <a href="mailto:{{ customer.user.email }}">{{ customer.user.email }}</a>
+                </div>
+                <div>
+                    Адрес: <strong>{{ customer.address }}</strong><br>
+                </div>
+                <div>
+                    Город: <strong>{{ customer.city }}</strong><br>
+                </div>
+                <div>
+                    Телефон: <strong>{{ customer.phone }}</strong><br>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Пока нет заказчиков.</p>
+{% endif %}
+{% endblock %}
