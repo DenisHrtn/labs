@@ -150,14 +150,14 @@
       </tbody>
     </table>
   {% else %}
-    <div class="alert alert-success">
+    <div>
       <p>У вас пока нет заказов. <a href="{% url 'product_list' %}" class="btn">Начать покупки</a></p>
     </div>
   {% endif %}
 </section>
 {% else %}
 <section class="card">
-  <div class="alert alert-success">
+  <div>
     <p>Чтобы увидеть историю заказов, пожалуйста, <a href="{% url 'login' %}" class="btn">войдите</a> в систему.</p>
   </div>
 </section>

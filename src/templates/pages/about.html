@@ -23,12 +23,12 @@
     </article>
 </section>
 
-{% if company.video_url %}
+{% if company.video %}
 <section class="card">
     <h2>Видео о компании</h2>
     <div style="text-align: center;">
         <video width="100%" height="auto" controls style="max-width: 800px; border-radius: 10px;">
-            <source src="/media/video/test.mp4" type="video/mp4">
+            <source src="{{ company.video.url }}" type="video/mp4">
             Ваш браузер не поддерживает видео.
         </video>
     </div>
@@ -53,7 +53,7 @@
 
 <section class="card">
     <h2>Реквизиты компании</h2>
-    <div class="alert alert-success">
+    <div>
         <pre style="white-space: pre-wrap; font-family: inherit;">{{ company.requisites }}</pre>
     </div>
 </section>
@@ -65,16 +65,20 @@
     </blockquote>
 </section>
 
+{% if company.audio %}
 <section class="card">
     <h2>Аудио приветствие</h2>
     <div style="text-align: center;">
         <audio controls style="width: 100%; max-width: 500px;">
-            <source src="/media/mp3/helicopter-helicopter-parakofer-parakofer.mp3" type="audio/mpeg">
+            <source src="{{ company.audio.url }}" type="audio/mpeg">
             Ваш браузер не поддерживает аудио.
         </audio>
         <p><em>Послушайте приветственное сообщение от нашей команды</em></p>
     </div>
 </section>
+{% endif %}
+
+{# --- КОНЕЦ ИСПРАВЛЕНИЙ --- #}
 
 {% else %}
 <section class="card">
@@ -106,4 +110,3 @@
     </div>
 </section>
 {% endblock %}
-

@@ -8,20 +8,15 @@
     <meta name="author" content="Мебельная компания">
     <meta name="robots" content="index, follow">
     
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="{% block og_title %}{% block title %}Мебельный магазин{% endblock %}{% endblock %}">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
     
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
 
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon" href="/media/favicon.ico">
+    <link rel="apple-touch-icon" href="/media/apple-touch-icon.ico">
     
-    <!-- Additional CSS -->
     <link rel="stylesheet" href="/static/css/custom.css">
     
     <style>
@@ -311,7 +306,6 @@
             }
         }
         
-        /* Анимации */
         @keyframes fadeInUp {
             from {
                 opacity: 0;

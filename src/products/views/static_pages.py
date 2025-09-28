@@ -4,8 +4,8 @@ from django.conf import settings
 from django.shortcuts import render
 from django.http import FileResponse
 
-from products.models.company import AboutCompany
-from products.models.partner import Partner
+from ..models import AboutCompany
+from ..models import Partner
 
 
 def about_view(request):

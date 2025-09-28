@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+from django.db.models import Avg
+
 from products.forms.review_form import ReviewForm
-from products.models import Review, Product
-from common_services.permissions.login_permissions import login_required_redirect
+from products.models import Review
 
 
 def product_reviews_view(request):
     reviews = Review.objects.select_related('product', 'user').order_by('-created_at')
+
+    average_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0
 
     if request.method == 'POST':
         if not request.user.is_authenticated:
@@ -23,5 +25,6 @@ def product_reviews_view(request):
 
     return render(request, 'products/product_reviews.html', {
         'form': form,
-        'reviews': reviews
+        'reviews': reviews,
+        'average_rating': average_rating,
     })

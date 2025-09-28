@@ -82,14 +82,7 @@
         <article class="card">
             <h3>📊 Общая оценка</h3>
             <p style="font-size: 2rem; color: #667eea; font-weight: bold;">
-                {% if reviews %}
-                    {% for review in reviews %}
-                        {{ review.rating|add:0 }}
-                    {% endfor %}
-                {% else %}
-                    0
-                {% endif %}
-                /5
+                {{ average_rating|floatformat:1 }} / 5
             </p>
         </article>
         <article class="card">

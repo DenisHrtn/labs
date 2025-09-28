@@ -46,7 +46,7 @@
 
 <section class="card">
     <h2>Итого к оплате</h2>
-    <div class="alert alert-success">
+    <div>
         <p style="font-size: 3.5rem; font-weight: bold;">{{ total }} BYN</p>
     </div>
     
@@ -58,7 +58,7 @@
 
 {% else %}
 <section class="card">
-    <div class="alert alert-success">
+    <div>
         <h2>Корзина пуста</h2>
         <p>Добавьте товары в корзину, чтобы оформить заказ</p>
         <a href="{% url 'product_list' %}" class="btn btn-success">🛍️ Перейти к каталогу</a>
