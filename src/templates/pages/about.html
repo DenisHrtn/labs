@@ -70,6 +70,7 @@
     <h2>Аудио приветствие</h2>
     <div style="text-align: center;">
         <audio controls style="width: 100%; max-width: 500px;">
+            {# ИСПРАВЛЕНО: Добавлено .url #}
             <source src="{{ company.audio.url }}" type="audio/mpeg">
             Ваш браузер не поддерживает аудио.
         </audio>
@@ -77,8 +78,6 @@
     </div>
 </section>
 {% endif %}
-
-{# --- КОНЕЦ ИСПРАВЛЕНИЙ --- #}
 
 {% else %}
 <section class="card">

@@ -30,5 +30,5 @@ class CompanyHistoryInline(admin.TabularInline):
 @admin.register(AboutCompany)
 class AboutCompanyAdmin(admin.ModelAdmin):
     list_display = ('name',)
-    fields = ('name', 'logo', 'description', 'video_url', 'requisites', 'certificate_text')
+    fields = ('name', 'logo', 'description', 'video', 'audio', 'requisites', 'certificate_text')
     inlines = [CompanyHistoryInline]
