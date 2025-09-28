@@ -1,4 +1,6 @@
 from django.urls import path
+
+from .views.partners_list import partners_list_view
 from .views.products import product_list
 from .views.product_detail import product_detail_view, add_to_cart_view
 from .views.cart import cart_view, cart_remove_item, cart_update_qty, cart_increase, cart_decrease
@@ -54,4 +56,5 @@ urlpatterns = [
     path('cart/dec/<int:product_id>/', cart_decrease, name='cart_decrease'),
     path('checkout/', checkout_view, name='checkout'),
     path("download/privacy/", download_privacy, name="download_privacy"),
+    path('partners/', partners_list_view, name='partners_list'),
 ]

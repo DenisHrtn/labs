@@ -1,6 +1,13 @@
+from datetime import date, timedelta
+
 from django import forms
 from django.shortcuts import render, redirect
-from products.models import Product
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.shortcuts import render, redirect
+
+from products.models import Product, Order, OrderItem
+from users.models import Customer
 
 
 class CheckoutForm(forms.Form):
@@ -13,40 +20,55 @@ class CheckoutForm(forms.Form):
     agree = forms.BooleanField(label='Согласен с политикой конфиденциальности')
 
 
+@login_required
 def checkout_view(request):
     cart = request.session.get('cart', {})
     if not cart:
+        messages.error(request, 'Ваша корзина пуста.')
         return redirect('cart_view')
 
-    # Подсчитываем общую сумму
     total = 0
     cart_items = []
-    for product_id, quantity in cart.items():
-        try:
-            product = Product.objects.get(id=product_id)
-            item_total = float(product.price) * quantity
-            total += item_total
-            cart_items.append({
-                'product': product,
-                'quantity': quantity,
-                'total': item_total
-            })
-        except Product.DoesNotExist:
-            continue
+    products = Product.objects.filter(id__in=cart.keys())
+
+    for product in products:
+        quantity = cart[str(product.id)]
+        item_total = product.price * quantity
+        total += item_total
+        cart_items.append({'product': product, 'quantity': quantity})
 
     if request.method == 'POST':
         form = CheckoutForm(request.POST)
         if form.is_valid():
+            try:
+                current_customer = Customer.objects.get(user=request.user)
+            except Customer.DoesNotExist:
+                messages.error(request, 'Не удалось найти ваш профиль покупателя. Обратитесь в поддержку.')
+                return redirect('checkout_view')
+
+            order = Order.objects.create(
+                customer=current_customer,
+                order_date=date.today(),
+                delivery_date=date.today() + timedelta(days=3)
+            )
+
+            for item in cart_items:
+                OrderItem.objects.create(
+                    order=order,
+                    product=item['product'],
+                    quantity=item['quantity'],
+                )
+
             request.session['cart'] = {}
-            return render(request, 'products/checkout_success.html', {'data': form.cleaned_data})
+
+            return render(request, 'products/checkout_success.html', {
+                'data': form.cleaned_data
+            })
     else:
         form = CheckoutForm()
 
     return render(request, 'products/checkout.html', {
-        'form': form, 
-        'total': total,
-        'cart_items': cart_items
+        'form': form,
+        'total': total
     })
-
-
 
