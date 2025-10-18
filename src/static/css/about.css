@@ -1,0 +1,332 @@
+/* Стили для страницы "О компании" */
+
+/* Логотип с трансформацией */
+.company-logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s ease;
+    margin: 2rem auto;
+    display: block;
+}
+
+.company-logo:hover {
+    transform: rotate(360deg) scale(1.1);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Сертификат - стилизация как "билет" */
+.certificate {
+    position: relative;
+    background: linear-gradient(135deg, #FFFFFF, #F8F8FF);
+    border: 3px solid #8B4513;
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    overflow: hidden;
+}
+
+.certificate::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, #8B4513, #D2691E, #CD853F, #8B4513);
+    z-index: -1;
+    border-radius: 18px;
+}
+
+.certificate::after {
+    content: '🏆';
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    font-size: 2rem;
+    background: #8B4513;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Границы с изображением */
+.certificate-border {
+    border-image: linear-gradient(45deg, #8B4513, #D2691E, #CD853F) 1;
+    -webkit-border-image: linear-gradient(45deg, #8B4513, #D2691E, #CD853F) 1;
+    -moz-border-image: linear-gradient(45deg, #8B4513, #D2691E, #CD853F) 1;
+    -o-border-image: linear-gradient(45deg, #8B4513, #D2691E, #CD853F) 1;
+    border-width: 5px;
+    border-style: solid;
+}
+
+/* Фоновое изображение для сертификата */
+.certificate-bg {
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(210, 105, 30, 0.1) 0%, transparent 50%),
+        linear-gradient(135deg, #FFFFFF 0%, #F8F8FF 100%);
+    background-size: 100% 100%, 100% 100%, 100% 100%;
+    background-position: 0 0, 0 0, 0 0;
+    background-repeat: no-repeat;
+}
+
+/* История компании - список */
+.history-list {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+    position: relative;
+}
+
+.history-list::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, #8B4513, #D2691E, #CD853F);
+    border-radius: 2px;
+}
+
+.history-item {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-left: 60px;
+    background: linear-gradient(135deg, #FFFFFF, #F8F8FF);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.history-item::before {
+    content: '';
+    position: absolute;
+    left: -40px;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    background: #8B4513;
+    border-radius: 50%;
+    border: 4px solid #FFFFFF;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.history-item:hover {
+    transform: translateX(10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.history-year {
+    font-weight: bold;
+    color: #8B4513;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.history-event {
+    color: #333;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+/* Реквизиты - выделение шрифтом */
+.requisites {
+    background: linear-gradient(135deg, #8B4513, #A0522D);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 2rem 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    border: 3px solid #CD853F;
+}
+
+.requisites strong {
+    color: #FFE4B5;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Видео и аудио стили */
+.media-container {
+    background: linear-gradient(135deg, #F5F5DC, #E6E6FA);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid #CD853F;
+}
+
+.video-player {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.video-player:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+.audio-player {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #FFFFFF, #F8F8FF);
+    padding: 1rem;
+}
+
+/* Преимущества компании */
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.advantage-card {
+    background: linear-gradient(135deg, #FFFFFF, #F8F8FF);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid #CD853F;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.advantage-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(139, 69, 19, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+}
+
+.advantage-card:hover::before {
+    opacity: 1;
+    animation: shine 0.8s ease-in-out;
+}
+
+.advantage-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.advantage-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.advantage-title {
+    color: #8B4513;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.advantage-description {
+    color: #666;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .company-logo {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .certificate {
+        padding: 1.5rem;
+        margin: 1rem 0;
+    }
+    
+    .history-item {
+        padding-left: 40px;
+    }
+    
+    .history-item::before {
+        left: -30px;
+        width: 15px;
+        height: 15px;
+    }
+    
+    .requisites {
+        padding: 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .advantages-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .advantage-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .company-logo {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .certificate {
+        padding: 1rem;
+    }
+    
+    .history-item {
+        padding-left: 30px;
+        padding: 1rem;
+    }
+    
+    .history-item::before {
+        left: -25px;
+        width: 12px;
+        height: 12px;
+    }
+    
+    .requisites {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .advantage-card {
+        padding: 1rem;
+    }
+    
+    .advantage-icon {
+        font-size: 2rem;
+    }
+    
+    .advantage-title {
+        font-size: 1.2rem;
+    }
+}
+

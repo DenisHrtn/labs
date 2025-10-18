@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Новости - Мебельный магазин{% endblock %}
 {% block description %}Последние новости и события в мире мебели. Узнайте о новых поступлениях, акциях и специальных предложениях.{% endblock %}
 
@@ -8,45 +9,50 @@
     <p>Будьте в курсе последних новостей и событий в мире мебели</p>
 </header>
 
-<section class="card">
+<section>
     {% if news %}
-        <div class="grid">
+        <div class="news-grid">
             {% for item in news %}
-                <article class="card">
+                <article class="news-article">
                     <header>
-                        <h2><a href="{% url 'news_detail' item.pk %}">{{ item.title }}</a></h2>
-                        <time datetime="{{ item.published_at|date:'c' }}">{{ item.published_at|date:"d.m.Y H:i" }}</time>
+                        <h2 class="news-title"><a href="{% url 'news_detail' item.pk %}">{{ item.title }}</a></h2>
+                        <div class="news-meta">
+                            <time datetime="{{ item.published_at|date:'c' }}">{{ item.published_at|date:"d.m.Y H:i" }}</time>
+                        </div>
                     </header>
                     
                     {% if item.image %}
-                        <img src="{{ item.image.url }}" alt="{{ item.title }}" style="max-width: 100%; height: auto; border-radius: 8px; margin: 1rem 0;">
+                        <img src="{{ item.image.url }}" alt="{{ item.title }}" class="news-image">
                     {% endif %}
                     
-                    <p>{{ item.content|truncatewords:20 }}</p>
+                    <div class="news-excerpt news-excerpt-truncated">
+                        {{ item.content|truncatewords:20 }}
+                    </div>
                     
                     <footer>
-                        <a href="{% url 'news_detail' item.pk %}" class="btn">Читать далее →</a>
+                        <a href="{% url 'news_detail' item.pk %}" class="news-read-more">Читать далее →</a>
                     </footer>
                 </article>
             {% endfor %}
         </div>
     {% else %}
-        <div class="alert alert-success">
+        <div>
             <p>Новостей пока нет. Мы работаем над наполнением этого раздела.</p>
         </div>
     {% endif %}
 </section>
 
-<section class="card">
+<section class="subscription-form">
     <h2>Подписка на новости</h2>
     <p>Подпишитесь на нашу рассылку, чтобы первыми узнавать о новых товарах и акциях!</p>
-    <form method="post" class="form-group">
+    <form method="post">
         {% csrf_token %}
-        <div class="form-group">
-            <label for="email">Email:</label>
+        <div>
             <input type="email" id="email" name="email" placeholder="your@email.com" required>
         </div>
-        <button type="submit" class="btn btn-success">📧 Подписаться</button>
+        <button type="submit">📧 Подписаться</button>
     </form>
 </section>
+
+<link rel="stylesheet" href="{% static 'css/news.css' %}">
 {% endblock %}

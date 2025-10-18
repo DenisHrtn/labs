@@ -1,0 +1,597 @@
+/* Стили для страницы промокодов с таблицами */
+
+/* Контейнер промокодов */
+.promo-container {
+    margin: 2rem 0;
+    padding: 2rem;
+    background: linear-gradient(135deg, #F5F5DC, #E6E6FA);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовок страницы */
+.promo-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, #8B4513, #D2691E);
+    color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.promo-header h1 {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1rem;
+}
+
+.promo-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-style: italic;
+}
+
+/* Сетка промокодов */
+.promo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+/* Карточка промокода */
+.promo-card {
+    background: linear-gradient(135deg, #FFFFFF, #F8F8FF);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid #CD853F;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.promo-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(139, 69, 19, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+}
+
+.promo-card:hover::before {
+    opacity: 1;
+    animation: shine 0.8s ease-in-out;
+}
+
+.promo-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Заголовок промокода */
+.promo-code {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #8B4513;
+    text-align: center;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, #F5F5DC, #E6E6FA);
+    padding: 1rem;
+    border-radius: 10px;
+    border: 2px dashed #8B4513;
+}
+
+/* Скидка */
+.promo-discount {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #D2691E;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Описание промокода */
+.promo-description {
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Срок действия */
+.promo-validity {
+    background: linear-gradient(135deg, #8B4513, #A0522D);
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
+}
+
+.promo-validity strong {
+    color: #FFE4B5;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Футер промокода */
+.promo-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.promo-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.promo-btn {
+    background: linear-gradient(135deg, #8B4513, #D2691E);
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(139, 69, 19, 0.3);
+}
+
+.promo-btn:hover {
+    background: linear-gradient(135deg, #D2691E, #CD853F);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(139, 69, 19, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+.promo-btn.delete {
+    background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+    box-shadow: 0 3px 10px rgba(255, 107, 107, 0.3);
+}
+
+.promo-btn.delete:hover {
+    background: linear-gradient(135deg, #FF8E8E, #FFB6B6);
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+}
+
+/* Форма создания промокода */
+.promo-form {
+    background: linear-gradient(135deg, #FFFFFF, #F8F8FF);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 3rem 0;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    border: 3px solid #8B4513;
+    position: relative;
+    overflow: hidden;
+}
+
+.promo-form::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(139, 69, 19, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+}
+
+.promo-form:hover::before {
+    opacity: 1;
+    animation: shine 0.8s ease-in-out;
+}
+
+.promo-form h2 {
+    color: #8B4513;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #8B4513;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #CD853F;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #FFFFFF, #F8F8FF);
+    color: #333;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #8B4513;
+    box-shadow: 0 0 15px rgba(139, 69, 19, 0.3);
+    background: white;
+    transform: translateY(-2px);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #8B4513, #D2691E);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
+    display: block;
+    margin: 2rem auto 0;
+    width: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.submit-btn:hover::before {
+    left: 100%;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(135deg, #D2691E, #CD853F);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
+}
+
+/* Таблица промокодов */
+.promo-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    border: 3px solid #8B4513;
+}
+
+.promo-table caption {
+    caption-side: top;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #8B4513;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    background: linear-gradient(135deg, #8B4513, #A0522D);
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+.promo-table th,
+.promo-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #CD853F;
+    vertical-align: middle;
+}
+
+.promo-table th {
+    background: linear-gradient(135deg, #8B4513, #D2691E);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.promo-table tr:nth-child(even) {
+    background-color: rgba(139, 69, 19, 0.05);
+}
+
+.promo-table tr:hover {
+    background-color: rgba(210, 105, 30, 0.1);
+    transform: scale(1.01);
+    transition: all 0.3s ease;
+}
+
+.promo-table td:empty {
+    background-color: #f0f0f0;
+    color: #999;
+    font-style: italic;
+}
+
+.promo-table .promo-code-cell {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    color: #8B4513;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.promo-table .discount-cell {
+    color: #D2691E;
+    font-weight: bold;
+    text-align: center;
+}
+
+.promo-table .date-cell {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.promo-table .action-cell {
+    text-align: center;
+}
+
+/* Секция "Как использовать промокод" */
+.how-to-use {
+    background: linear-gradient(135deg, #8B4513, #A0522D);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 3rem 0;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.how-to-use h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.how-to-use-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.how-to-use-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.how-to-use-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.how-to-use-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.how-to-use-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.how-to-use-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+/* Условия использования */
+.conditions {
+    background: linear-gradient(135deg, #F5F5DC, #E6E6FA);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 3rem 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid #CD853F;
+}
+
+.conditions h2 {
+    color: #8B4513;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.conditions ul {
+    list-style: none;
+    padding: 0;
+}
+
+.conditions li {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #FFFFFF, #F8F8FF);
+    border-radius: 10px;
+    border-left: 4px solid #8B4513;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.conditions li:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.conditions li::before {
+    content: "✓";
+    color: #8B4513;
+    font-weight: bold;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .promo-container {
+        padding: 1rem;
+    }
+    
+    .promo-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .promo-card {
+        padding: 1.5rem;
+    }
+    
+    .promo-code {
+        font-size: 1.5rem;
+    }
+    
+    .promo-form {
+        padding: 1.5rem;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .form-group {
+        min-width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .promo-table {
+        font-size: 0.9rem;
+    }
+    
+    .promo-table th,
+    .promo-table td {
+        padding: 0.75rem;
+    }
+    
+    .how-to-use-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .submit-btn {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .promo-card {
+        padding: 1rem;
+    }
+    
+    .promo-code {
+        font-size: 1.2rem;
+    }
+    
+    .promo-form {
+        padding: 1rem;
+    }
+    
+    .promo-table {
+        font-size: 0.8rem;
+    }
+    
+    .promo-table th,
+    .promo-table td {
+        padding: 0.5rem;
+    }
+    
+    .how-to-use {
+        padding: 1rem;
+    }
+    
+    .conditions {
+        padding: 1rem;
+    }
+}
+
+/* Высота экрана */
+@media (max-height: 600px) {
+    .promo-container {
+        padding: 1rem;
+    }
+    
+    .promo-card {
+        padding: 1rem;
+    }
+    
+    .promo-form {
+        padding: 1rem;
+    }
+}
+

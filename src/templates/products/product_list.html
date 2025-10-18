@@ -1,57 +1,68 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Каталог товаров - Мебельный магазин{% endblock %}
 {% block description %}Широкий ассортимент качественной мебели: диваны, кресла, столы, стулья и многое другое по доступным ценам.{% endblock %}
 
 {% block content %}
-<header>
-    <h1>Каталог товаров</h1>
-    <p>Выберите мебель для вашего дома из нашего широкого ассортимента</p>
-</header>
-
-<section class="card">
-    <h2>Фильтры</h2>
-    <form method="get" class="form-group">
-        <div class="grid">
-            <div class="form-group">
+<div class="catalog-container">
+    <!-- Боковая панель с фильтрами -->
+    <aside class="catalog-filters">
+        <h2>Фильтры</h2>
+        <form method="get">
+            <div class="filter-group">
                 <label for="id_category">Категория:</label>
                 {{ form.category }}
             </div>
-            <div class="form-group">
+            <div class="filter-group">
                 <label for="id_model">Модель:</label>
                 {{ form.model }}
             </div>
-        </div>
-        <button type="submit" class="btn">🔍 Фильтровать</button>
-        <a href="{% url 'product_list' %}" class="btn btn-secondary">Сбросить фильтры</a>
-    </form>
-</section>
+            <div class="filter-buttons">
+                <button type="submit" class="filter-btn">🔍 Фильтровать</button>
+                <a href="{% url 'product_list' %}" class="filter-btn reset">Сбросить фильтры</a>
+            </div>
+        </form>
+    </aside>
 
-<section class="card">
-    <h2>Товары</h2>
-    {% if products %}
-        <div class="grid">
-            {% for product in products %}
-            <article class="card">
-                <header>
-                    <h3><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></h3>
-                </header>
-                <div>
-                    <p><strong>Цена:</strong> {{ product.price }} BYN</p>
-                    <p><strong>Категория:</strong> {{ product.category.name }}</p>
-                    <p><strong>Модель:</strong> {{ product.model.name }}</p>
-                    <p><strong>Артикул:</strong> {{ product.product_code }}</p>
-                </div>
-                <footer>
-                    <a href="{% url 'product_detail' product.pk %}" class="btn">Подробнее</a>
-                    <a href="{% url 'add_to_cart' product.pk %}" class="btn btn-success">🛒 В корзину</a>
-                </footer>
-            </article>
-            {% endfor %}
-        </div>
-    {% else %}
-        <div class="alert alert-success">
-            <p>Товары не найдены. Попробуйте изменить фильтры или <a href="{% url 'product_list' %}" class="btn">показать все товары</a></p>
-        </div>
-    {% endif %}
-</section>
+    <!-- Основной контент -->
+    <main class="catalog-content">
+        <header class="catalog-header">
+            <h1>Каталог товаров</h1>
+            <p>Выберите <dfn title="Предметы обстановки жилых и общественных помещений">мебель</dfn> для вашего дома из нашего широкого ассортимента. Все товары имеют <abbr title="Сертификат соответствия">СО</abbr> качества.</p>
+        </header>
+
+        {% if products %}
+            <div class="products-grid">
+                {% for product in products %}
+                <article class="product-card">
+                    <header>
+                        <h3 class="product-title"><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></h3>
+                    </header>
+                    
+                    <div class="product-info">
+                        <div class="product-price">{{ product.price }} BYN</div>
+                        <p class="product-category">{{ product.category.name }}</p>
+                        <p class="product-model">{{ product.model.name }}</p>
+                        <div class="product-code">{{ product.product_code }}</div>
+                    </div>
+                    
+                    <footer class="product-footer">
+                        <div class="product-actions">
+                            <a href="{% url 'product_detail' product.pk %}" class="product-btn details">Подробнее</a>
+                            <a href="{% url 'add_to_cart' product.pk %}" class="product-btn cart">🛒 В корзину</a>
+                        </div>
+                    </footer>
+                </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-products">
+                <h2>Товары не найдены</h2>
+                <p>Попробуйте изменить фильтры или <a href="{% url 'product_list' %}">показать все товары</a></p>
+            </div>
+        {% endif %}
+    </main>
+</div>
+
+<link rel="stylesheet" href="{% static 'css/catalog.css' %}">
 {% endblock %}

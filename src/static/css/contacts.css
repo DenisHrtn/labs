@@ -1,0 +1,365 @@
+/* Стили для страницы контактов */
+
+/* Контейнер для сотрудников с Flexbox */
+.contacts-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    align-items: stretch;
+    margin: 2rem 0;
+    padding: 2rem;
+    background: linear-gradient(135deg, #F5F5DC, #E6E6FA);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Карточка сотрудника */
+.employee-card {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    background: linear-gradient(135deg, #FFFFFF, #F8F8FF);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid #CD853F;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.employee-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(139, 69, 19, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+}
+
+.employee-card:hover::before {
+    opacity: 1;
+    animation: shine 0.8s ease-in-out;
+}
+
+.employee-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Фото сотрудника */
+.employee-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #8B4513;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.employee-photo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+/* Имя сотрудника */
+.employee-name {
+    color: #8B4513;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Должность */
+.employee-position {
+    color: #D2691E;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    font-style: italic;
+    text-transform: capitalize;
+}
+
+/* Контактная информация */
+.employee-contacts {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.contact-item {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #F5F5DC, #E6E6FA);
+    border-radius: 10px;
+    border-left: 4px solid #8B4513;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: linear-gradient(135deg, #E6E6FA, #F0F8FF);
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.contact-label {
+    font-weight: bold;
+    color: #8B4513;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.contact-value {
+    color: #333;
+    font-size: 1rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.contact-value a {
+    color: #D2691E;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.contact-value a:hover {
+    color: #8B4513;
+    text-decoration: underline;
+    transform: translateY(-1px);
+}
+
+/* Email стили */
+.contact-value a[href^="mailto:"] {
+    color: #8B4513;
+    font-weight: bold;
+}
+
+.contact-value a[href^="mailto:"]:hover {
+    color: #D2691E;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Телефон стили */
+.contact-value a[href^="tel:"] {
+    color: #D2691E;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+}
+
+.contact-value a[href^="tel:"]:hover {
+    color: #8B4513;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Адрес */
+.contact-address {
+    background: linear-gradient(135deg, #8B4513, #A0522D);
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
+    border: 2px solid #CD853F;
+}
+
+.contact-address .contact-label {
+    color: #FFE4B5;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-address .contact-value {
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Заголовок страницы */
+.contacts-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, #8B4513, #D2691E);
+    color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.contacts-header h1 {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1rem;
+}
+
+.contacts-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-style: italic;
+}
+
+/* Сообщение об отсутствии контактов */
+.no-contacts {
+    text-align: center;
+    padding: 3rem;
+    background: linear-gradient(135deg, #F5F5DC, #E6E6FA);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid #CD853F;
+}
+
+.no-contacts h2 {
+    color: #8B4513;
+    margin-bottom: 1rem;
+}
+
+.no-contacts p {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .contacts-container {
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .employee-card {
+        min-width: 280px;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contacts-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1rem;
+    }
+    
+    .employee-card {
+        min-width: 100%;
+        max-width: 100%;
+        padding: 1.5rem;
+    }
+    
+    .employee-photo {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .employee-name {
+        font-size: 1.3rem;
+    }
+    
+    .employee-position {
+        font-size: 1rem;
+    }
+    
+    .contacts-header {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .contacts-header h1 {
+        font-size: 2rem;
+    }
+    
+    .contacts-header p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contacts-container {
+        padding: 0.5rem;
+        gap: 1rem;
+    }
+    
+    .employee-card {
+        padding: 1rem;
+    }
+    
+    .employee-photo {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .employee-name {
+        font-size: 1.1rem;
+    }
+    
+    .employee-position {
+        font-size: 0.9rem;
+    }
+    
+    .contact-item {
+        padding: 0.5rem;
+    }
+    
+    .contact-label {
+        font-size: 0.8rem;
+    }
+    
+    .contact-value {
+        font-size: 0.9rem;
+    }
+    
+    .contacts-header {
+        padding: 1rem;
+    }
+    
+    .contacts-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .contacts-header p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Высота экрана */
+@media (max-height: 600px) {
+    .contacts-container {
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .employee-card {
+        padding: 1rem;
+    }
+    
+    .employee-photo {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .contacts-header {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+

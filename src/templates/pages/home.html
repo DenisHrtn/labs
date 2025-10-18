@@ -1,26 +1,121 @@
+{% extends "base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Главная</title>
-</head>
-<body>
-  <h1>Добро пожаловать, {{ request.user.email }}!</h1>
+{% block title %}Главная - Мебельная фабрика{% endblock %}
+{% block description %}Добро пожаловать в мир качественной мебели! Создаем уют в вашем доме с 1995 года.{% endblock %}
 
-  <p>Ваша роль:</p>
-  <ul>
-    {% if request.user.is_superuser %}
-      <li>Суперпользователь</li>
-    {% elif request.user.is_client %}
-      <li>Клиент</li>
-    {% elif request.user.is_customer %}
-      <li>Пользователь</li>
-    {% else %}
-      <li>Неопределена</li>
-    {% endif %}
-  </ul>
+{% block content %}
+<!-- Анимация "Мебельная фабрика" -->
+<div class="animation-container">
+    <div class="animation-board"></div>
+    <div class="animation-board"></div>
+    <div class="animation-board"></div>
+    <div class="animation-board"></div>
+    <div class="animation-board"></div>
+    
+    <div class="animation-screw"></div>
+    <div class="animation-screw"></div>
+    <div class="animation-screw"></div>
+    <div class="animation-screw"></div>
+    <div class="animation-screw"></div>
+    
+    <div class="animation-hammer"></div>
+    <div class="animation-hammer"></div>
+    <div class="animation-hammer"></div>
+    <div class="animation-hammer"></div>
+    <div class="animation-hammer"></div>
+    
+    <div class="animation-furniture animation-table"></div>
+    <div class="animation-furniture animation-chair"></div>
+    <div class="animation-furniture animation-cabinet"></div>
+    <div class="animation-furniture animation-sofa"></div>
+    
+    <div class="company-name">Мебельная фабрика</div>
+</div>
 
-  <a href="{% url 'logout' %}">Выйти</a>
-</body>
-</html>
+<!-- Прелоадер в стиле Лего -->
+<div class="lego-preloader">
+    <div class="lego-title">🏗️ LEGO</div>
+    <div class="lego-block"></div>
+    <div class="lego-block"></div>
+    <div class="lego-block"></div>
+    <div class="lego-block"></div>
+    <div class="lego-block"></div>
+    <div class="lego-block"></div>
+    <div class="lego-block"></div>
+    <div class="lego-block"></div>
+    <div class="lego-block"></div>
+    <div class="lego-block"></div>
+</div>
+
+<!-- Приветствие -->
+<section class="main-content">
+    <h1 class="company-title">Добро пожаловать, {{ request.user.email }}!</h1>
+    
+    <div class="highlight">
+        <p>Ваша роль в нашей системе:</p>
+        <ul class="unicode-list">
+            {% if request.user.is_superuser %}
+                <li>Суперпользователь - полный доступ ко всем функциям</li>
+            {% elif request.user.is_client %}
+                <li>Клиент - доступ к покупкам и заказам</li>
+            {% elif request.user.is_customer %}
+                <li>Пользователь - базовый доступ</li>
+            {% else %}
+                <li>Неопределена - обратитесь к администратору</li>
+            {% endif %}
+        </ul>
+    </div>
+</section>
+
+<!-- Партнеры -->
+<section class="partners-section">
+    <h2>Наши партнеры</h2>
+    <div class="partners-grid">
+        <div class="partner-block">
+            <span>IKEA</span>
+        </div>
+        <div class="partner-block">
+            <span>JYSK</span>
+        </div>
+        <div class="partner-block">
+            <span>Möbelix</span>
+        </div>
+        <div class="partner-block">
+            <span>Kika</span>
+        </div>
+        <div class="partner-block">
+            <span>XXXLutz</span>
+        </div>
+        <div class="partner-block">
+            <span>Mömax</span>
+        </div>
+    </div>
+</section>
+
+<!-- Последняя статья -->
+<section class="latest-article">
+    <h2>Последние новости</h2>
+    <article class="article">
+        <h3>Новая коллекция мебели 2024</h3>
+        <p>Представляем вашему вниманию новую коллекцию мебели, созданную с учетом последних тенденций дизайна и экологически чистых материалов. Каждое изделие проходит строгий контроль качества и изготавливается с любовью к деталям.</p>
+        <a href="{% url 'news_list' %}">Читать все новости →</a>
+    </article>
+</section>
+
+<!-- Навигация по разделам -->
+<section class="main-content">
+    <h2>Навигация по сайту</h2>
+    <div class="highlight">
+        <p>Используйте меню выше для перехода к нужным разделам:</p>
+        <ul>
+            <li><strong>📦 Каталог</strong> - просмотр товаров</li>
+            <li><strong>🛒 Корзина</strong> - ваши покупки</li>
+            <li><strong>👀 Новости</strong> - последние события</li>
+            <li><strong>📞 Контакты</strong> - связь с нами</li>
+        </ul>
+    </div>
+</section>
+
+<link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+{% endblock %}

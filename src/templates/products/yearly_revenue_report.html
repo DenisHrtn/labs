@@ -9,15 +9,15 @@
 <table>
     <thead>
         <tr>
-            <th>Год</th>
-            <th>Сумма продаж (BYN)</th>
+            <th id="revenue-year">Год</th>
+            <th id="revenue-amount">Сумма продаж (BYN)</th>
         </tr>
     </thead>
     <tbody>
         {% for row in revenue_by_year %}
         <tr>
-            <td>{{ row.year }}</td>
-            <td>{{ row.total_revenue|floatformat:2 }}</td>
+            <td headers="revenue-year">{{ row.year }}</td>
+            <td headers="revenue-amount">{{ row.total_revenue|floatformat:2 }}</td>
         </tr>
         {% endfor %}
     </tbody>

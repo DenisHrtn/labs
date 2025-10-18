@@ -7,19 +7,19 @@
 <table>
     <thead>
         <tr>
-            <th>Клиент</th>
-            <th>Город</th>
-            <th>Объем (шт)</th>
-            <th>Сумма (BYN)</th>
+            <th id="client-name">Клиент</th>
+            <th id="client-city">Город</th>
+            <th id="client-volume">Объем (шт)</th>
+            <th id="client-amount">Сумма (BYN)</th>
         </tr>
     </thead>
     <tbody>
         {% for row in client_summary %}
         <tr>
-            <td>{{ row.order__customer__name }}</td>
-            <td>{{ row.order__customer__city }}</td>
-            <td>{{ row.total_quantity }}</td>
-            <td>{{ row.total_spent|floatformat:2 }}</td>
+            <td headers="client-name">{{ row.order__customer__name }}</td>
+            <td headers="client-city">{{ row.order__customer__city }}</td>
+            <td headers="client-volume">{{ row.total_quantity }}</td>
+            <td headers="client-amount">{{ row.total_spent|floatformat:2 }}</td>
         </tr>
         {% endfor %}
     </tbody>

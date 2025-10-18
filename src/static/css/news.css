@@ -1,0 +1,369 @@
+/* Стили для страницы новостей */
+
+/* Список новостей */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.news-article {
+    background: linear-gradient(135deg, #FFFFFF, #F8F8FF);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid #CD853F;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.news-article::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(139, 69, 19, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+}
+
+.news-article:hover::before {
+    opacity: 1;
+    animation: shine 0.8s ease-in-out;
+}
+
+.news-article:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.news-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.news-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.news-title {
+    color: #8B4513;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.4;
+}
+
+.news-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.news-title a:hover {
+    color: #D2691E;
+    text-decoration: underline;
+}
+
+.news-meta {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.news-excerpt {
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+    hyphens: auto;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Краткое содержание с многоточием */
+.news-excerpt-truncated {
+    height: 4.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-height: 1.5;
+}
+
+.news-read-more {
+    background: linear-gradient(135deg, #8B4513, #D2691E);
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
+}
+
+.news-read-more:hover {
+    background: linear-gradient(135deg, #D2691E, #CD853F);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+/* Форма подписки */
+.subscription-form {
+    background: linear-gradient(135deg, #8B4513, #A0522D);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 3rem 0;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.subscription-form h2 {
+    color: white;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subscription-form p {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.subscription-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+}
+
+.subscription-form input[type="email"] {
+    width: 100%;
+    max-width: 400px;
+    padding: 1rem;
+    border: 2px solid #CD853F;
+    border-radius: 25px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.subscription-form input[type="email"]:focus {
+    outline: none;
+    border-color: #FFE4B5;
+    background: white;
+    box-shadow: 0 0 20px rgba(255, 228, 181, 0.5);
+}
+
+.subscription-form button {
+    background: linear-gradient(135deg, #FFE4B5, #F0E68C);
+    color: #8B4513;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.subscription-form button:hover {
+    background: linear-gradient(135deg, #F0E68C, #FFE4B5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Многоколоночный макет для полной статьи */
+.article-content {
+    columns: 3;
+    column-gap: 2rem;
+    column-rule: 2px solid #CD853F;
+    column-fill: balance;
+    margin: 2rem 0;
+    text-align: justify;
+    line-height: 1.8;
+    hyphens: auto;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.article-content p {
+    margin-bottom: 1.5rem;
+    text-indent: 1.5rem;
+    orphans: 3;
+    widows: 3;
+}
+
+.article-content h2 {
+    column-span: all;
+    text-align: center;
+    margin: 2rem 0;
+    color: #8B4513;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.article-content h3 {
+    color: #D2691E;
+    font-size: 1.5rem;
+    margin: 1.5rem 0 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.article-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 1rem 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    break-inside: avoid;
+}
+
+.article-content blockquote {
+    background: linear-gradient(135deg, #F5F5DC, #E6E6FA);
+    border-left: 5px solid #8B4513;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 10px;
+    font-style: italic;
+    break-inside: avoid;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.article-content ul, .article-content ol {
+    break-inside: avoid;
+    margin: 1rem 0;
+    padding-left: 2rem;
+}
+
+.article-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+/* Адаптивность для многоколоночного макета */
+@media (max-width: 1024px) {
+    .article-content {
+        columns: 2;
+        column-gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .news-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .news-article {
+        padding: 1rem;
+    }
+    
+    .news-image {
+        height: 150px;
+    }
+    
+    .news-title {
+        font-size: 1.1rem;
+    }
+    
+    .article-content {
+        columns: 1;
+        column-rule: none;
+    }
+    
+    .subscription-form {
+        padding: 1.5rem;
+    }
+    
+    .subscription-form form {
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .news-grid {
+        gap: 1rem;
+    }
+    
+    .news-article {
+        padding: 0.75rem;
+    }
+    
+    .news-image {
+        height: 120px;
+    }
+    
+    .news-title {
+        font-size: 1rem;
+    }
+    
+    .news-excerpt {
+        font-size: 0.9rem;
+    }
+    
+    .news-read-more {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .subscription-form {
+        padding: 1rem;
+    }
+    
+    .subscription-form input[type="email"] {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .subscription-form button {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Высота экрана */
+@media (max-height: 600px) {
+    .news-grid {
+        gap: 1rem;
+    }
+    
+    .news-article {
+        padding: 1rem;
+    }
+    
+    .news-image {
+        height: 100px;
+    }
+}
+

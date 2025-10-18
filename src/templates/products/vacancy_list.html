@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Вакансии - Мебельный магазин{% endblock %}
 {% block description %}Присоединяйтесь к нашей команде! Актуальные вакансии в мебельной компании. Работа в дружном коллективе с перспективами роста.{% endblock %}
 
@@ -8,81 +9,90 @@
     <p>Присоединяйтесь к нашей команде профессионалов</p>
 </header>
 
-<section class="card">
+<section class="vacancies-container">
     {% if vacancies %}
-        <div class="grid">
-            {% for vacancy in vacancies %}
-                <article class="card">
-                    <header>
-                        <h2>{{ vacancy.title }}</h2>
+        {% for vacancy in vacancies %}
+            <article class="vacancy-card">
+                <header>
+                    <h2 class="vacancy-title">{{ vacancy.title }}</h2>
+                    <div class="vacancy-date">
                         <time datetime="{{ vacancy.published_at|date:'c' }}">Опубликовано: {{ vacancy.published_at|date:"d.m.Y H:i" }}</time>
-                    </header>
-                    
-                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
-                        <p>{{ vacancy.description }}</p>
                     </div>
-                    
-                    <footer>
+                </header>
+                
+                <div class="vacancy-description">
+                    <p>{{ vacancy.description }}</p>
+                </div>
+                
+                <footer class="vacancy-footer">
+                    <div class="vacancy-actions">
                         {% if request.user.is_staff %}
-                            <a href="{% url 'vacancy_edit' vacancy.pk %}" class="btn btn-secondary">✏️ Редактировать</a>
+                            <a href="{% url 'vacancy_edit' vacancy.pk %}" class="vacancy-btn edit">✏️ Редактировать</a>
                         {% endif %}
-                        <a href="mailto:hr@furniture-shop.by?subject=Отклик на вакансию: {{ vacancy.title }}" class="btn btn-success">📧 Откликнуться</a>
-                    </footer>
-                </article>
-            {% endfor %}
-        </div>
+                        <a href="mailto:hr@furniture-shop.by?subject=Отклик на вакансию: {{ vacancy.title }}" class="vacancy-btn">📧 Откликнуться</a>
+                    </div>
+                </footer>
+            </article>
+        {% endfor %}
     {% else %}
-        <div class="alert alert-success">
+        <div style="clear: both; text-align: center; padding: 3rem;">
             <p>В данный момент открытых вакансий нет. Но мы всегда рады талантливым людям!</p>
         </div>
     {% endif %}
 </section>
 
-<section class="card">
+<section class="why-work-section">
     <h2>Почему работать у нас?</h2>
-    <div class="grid">
-        <article class="card">
-            <h3>💼 Стабильность</h3>
-            <p>Надежная компания с многолетней историей</p>
+    <div class="why-work-grid">
+        <article class="why-work-item">
+            <span class="why-work-icon">💼</span>
+            <h3 class="why-work-title">Стабильность</h3>
+            <p class="why-work-description">Надежная компания с многолетней историей</p>
         </article>
-        <article class="card">
-            <h3>📈 Развитие</h3>
-            <p>Возможности карьерного роста и обучения</p>
+        <article class="why-work-item">
+            <span class="why-work-icon">📈</span>
+            <h3 class="why-work-title">Развитие</h3>
+            <p class="why-work-description">Возможности карьерного роста и обучения</p>
         </article>
-        <article class="card">
-            <h3>👥 Команда</h3>
-            <p>Дружный коллектив профессионалов</p>
+        <article class="why-work-item">
+            <span class="why-work-icon">👥</span>
+            <h3 class="why-work-title">Команда</h3>
+            <p class="why-work-description">Дружный коллектив профессионалов</p>
         </article>
-        <article class="card">
-            <h3>💰 Доход</h3>
-            <p>Конкурентная заработная плата и бонусы</p>
+        <article class="why-work-item">
+            <span class="why-work-icon">💰</span>
+            <h3 class="why-work-title">Доход</h3>
+            <p class="why-work-description">Конкурентная заработная плата и бонусы</p>
         </article>
     </div>
 </section>
 
-<section class="card">
+<section class="how-apply-section">
     <h2>Как откликнуться?</h2>
-    <div class="grid">
-        <article class="card">
-            <h3>📧 Email</h3>
-            <p>Отправьте резюме на <a href="mailto:hr@furniture-shop.by">hr@furniture-shop.by</a></p>
+    <div class="how-apply-grid">
+        <article class="how-apply-item">
+            <span class="how-apply-icon">📧</span>
+            <h3 class="how-apply-title">Email</h3>
+            <p class="how-apply-description">Отправьте резюме на <a href="mailto:hr@furniture-shop.by" class="how-apply-link">hr@furniture-shop.by</a></p>
         </article>
-        <article class="card">
-            <h3>📞 Телефон</h3>
-            <p>Звоните по номеру <a href="tel:+375291234567">+375 (29) 123-45-67</a></p>
+        <article class="how-apply-item">
+            <span class="how-apply-icon">📞</span>
+            <h3 class="how-apply-title">Телефон</h3>
+            <p class="how-apply-description">Звоните по номеру <a href="tel:+375291234567" class="how-apply-link">+375 (29) 123-45-67</a></p>
         </article>
-        <article class="card">
-            <h3>🏢 Офис</h3>
-            <p>Приходите лично в наш офис</p>
+        <article class="how-apply-item">
+            <span class="how-apply-icon">🏢</span>
+            <h3 class="how-apply-title">Офис</h3>
+            <p class="how-apply-description">Приходите лично в наш офис</p>
         </article>
     </div>
 </section>
 
-<section class="card">
+<section class="resume-form-section">
     <h2>Отправить резюме</h2>
-    <form method="post" enctype="multipart/form-data" class="form-group">
+    <form method="post" enctype="multipart/form-data" class="resume-form">
         {% csrf_token %}
-        <div class="grid">
+        <div class="form-row">
             <div class="form-group">
                 <label for="name">Имя:</label>
                 <input type="text" id="name" name="name" required>
@@ -108,7 +118,9 @@
             <label for="cover_letter">Сопроводительное письмо:</label>
             <textarea id="cover_letter" name="cover_letter" rows="4"></textarea>
         </div>
-        <button type="submit" class="btn btn-success">📤 Отправить заявку</button>
+        <button type="submit" class="submit-btn">📤 Отправить заявку</button>
     </form>
 </section>
+
+<link rel="stylesheet" href="{% static 'css/vacancies.css' %}">
 {% endblock %}

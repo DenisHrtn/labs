@@ -5,34 +5,34 @@
 {% block content %}
 <header>
     <h1>🛒 Корзина покупок</h1>
-    <p>Проверьте выбранные товары и оформите заказ</p>
+    <p>Проверьте выбранные товары и оформите <dfn title="Процесс покупки товаров через интернет-магазин">заказ</dfn>. При заказе от <abbr title="Белорусский рубль">BYN</abbr> 500 доставка бесплатная.</p>
 </header>
 
 {% if cart_items %}
-<section class="card">
+<section>
     <h2>Товары в корзине</h2>
-    <div class="grid">
+    <div>
         {% for item in cart_items %}
-        <article class="card">
+        <article>
             <header>
                 <h3>{{ item.product.name }}</h3>
                 <p><strong>Цена:</strong> {{ item.product.price }} BYN</p>
             </header>
             
-            <div style="display: flex; align-items: center; gap: 1rem; margin: 1rem 0;">
+            <div>
                 <label for="qty-{{ item.product.id }}">Количество:</label>
-                <form method="post" action="{% url 'cart_update' item.product.id %}" style="display: inline;">
+                <form method="post" action="{% url 'cart_update' item.product.id %}">
                     {% csrf_token %}
                     <input type="number" id="qty-{{ item.product.id }}" name="quantity" 
-                           value="{{ item.quantity }}" min="1" style="width: 80px;">
-                    <button type="submit" class="btn btn-secondary">Обновить</button>
+                           value="{{ item.quantity }}" min="1" size="5">
+                    <button type="submit">Обновить</button>
                 </form>
             </div>
             
-            <div style="display: flex; gap: 0.5rem; margin: 1rem 0;">
-                <a href="{% url 'cart_increase' item.product.id %}" class="btn btn-success">+</a>
-                <a href="{% url 'cart_decrease' item.product.id %}" class="btn btn-secondary">-</a>
-                <a href="{% url 'cart_remove' item.product.id %}" class="btn btn-secondary" 
+            <div>
+                <a href="{% url 'cart_increase' item.product.id %}">+</a>
+                <a href="{% url 'cart_decrease' item.product.id %}">-</a>
+                <a href="{% url 'cart_remove' item.product.id %}" 
                    onclick="return confirm('Удалить товар из корзины?')">🗑️ Удалить</a>
             </div>
             
@@ -44,44 +44,44 @@
     </div>
 </section>
 
-<section class="card">
+<section>
     <h2>Итого к оплате</h2>
     <div>
-        <p style="font-size: 3.5rem; font-weight: bold;">{{ total }} BYN</p>
+        <p><strong>{{ total }} BYN</strong></p>
     </div>
     
-    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-        <a href="{% url 'checkout' %}" class="btn btn-success">💳 Оформить заказ</a>
-        <a href="{% url 'product_list' %}" class="btn">← Продолжить покупки</a>
+    <div>
+        <a href="{% url 'checkout' %}">💳 Оформить заказ</a>
+        <a href="{% url 'product_list' %}">← Продолжить покупки</a>
     </div>
 </section>
 
 {% else %}
-<section class="card">
+<section>
     <div>
         <h2>Корзина пуста</h2>
         <p>Добавьте товары в корзину, чтобы оформить заказ</p>
-        <a href="{% url 'product_list' %}" class="btn btn-success">🛍️ Перейти к каталогу</a>
+        <a href="{% url 'product_list' %}">🛍️ Перейти к каталогу</a>
     </div>
 </section>
 {% endif %}
 
-<section class="card">
+<section>
     <h2>Преимущества покупки у нас</h2>
-    <div class="grid">
-        <article class="card">
+    <div>
+        <article>
             <h3>🚚 Бесплатная доставка</h3>
             <p>При заказе от 500 BYN</p>
         </article>
-        <article class="card">
+        <article>
             <h3>🔒 Безопасная оплата</h3>
             <p>Все способы оплаты защищены</p>
         </article>
-        <article class="card">
+        <article>
             <h3>📦 Гарантия качества</h3>
             <p>Официальная гарантия на все товары</p>
         </article>
-        <article class="card">
+        <article>
             <h3>🔄 Возврат и обмен</h3>
             <p>14 дней на возврат товара</p>
         </article>

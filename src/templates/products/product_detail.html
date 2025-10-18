@@ -3,14 +3,14 @@
 {% block description %}{{ product.name }} - качественная мебель по цене {{ product.price }} BYN. {{ product.category.name }} модели {{ product.model.name }}.{% endblock %}
 
 {% block content %}
-<article class="card">
+<article>
   <header>
     <h1>{{ product.name }}</h1>
     <p><strong>Артикул:</strong> {{ product.product_code }}</p>
   </header>
   
-  <section class="grid">
-    <div class="card">
+  <section>
+    <div>
       <h2>Информация о товаре</h2>
       <dl>
         <dt><strong>Категория:</strong></dt>
@@ -20,32 +20,32 @@
         <dd>{{ product.model.name }}</dd>
         
         <dt><strong>Цена:</strong></dt>
-        <dd><strong style="font-size: 1.5rem; color: #667eea;">{{ product.price }} BYN</strong></dd>
+        <dd><strong>{{ product.price }} <abbr title="Белорусский рубль">BYN</abbr></strong></dd>
         
         <dt><strong>Статус:</strong></dt>
         <dd>
           {% if product.is_active %}
-            <span style="color: green;">✅ В наличии</span>
+            <span>✅ В наличии</span>
           {% else %}
-            <span style="color: red;">❌ Нет в наличии</span>
+            <span>❌ Нет в наличии</span>
           {% endif %}
         </dd>
       </dl>
     </div>
     
-    <div class="card">
+    <div>
       <h2>Заказать товар</h2>
       {% if product.is_active %}
-        <form action="{% url 'add_to_cart' product.pk %}" method="post" class="form-group">
+        <form action="{% url 'add_to_cart' product.pk %}" method="post">
           {% csrf_token %}
-          <div class="form-group">
+          <div>
             <label for="qty">Количество:</label>
-            <input id="qty" type="number" name="quantity" min="1" value="1" required class="form-group input">
+            <input id="qty" type="number" name="quantity" min="1" value="1" required>
           </div>
-          <button type="submit" class="btn btn-success">🛒 Добавить в корзину</button>
+          <button type="submit">🛒 Добавить в корзину</button>
         </form>
       {% else %}
-        <div class="alert alert-error">
+        <div>
           <p>К сожалению, этот товар временно недоступен.</p>
         </div>
       {% endif %}
@@ -54,8 +54,8 @@
   
   <footer>
     <nav aria-label="Дополнительные действия">
-      <a href="{% url 'product_list' %}" class="btn">← Вернуться к каталогу</a>
-      <a href="{% url 'product_reviews' %}" class="btn btn-secondary">👀 Посмотреть отзывы</a>
+      <a href="{% url 'product_list' %}">← Вернуться к каталогу</a>
+      <a href="{% url 'product_reviews' %}">👀 Посмотреть отзывы</a>
     </nav>
   </footer>
 </article>

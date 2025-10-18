@@ -8,20 +8,20 @@
     <p>Завершите оформление вашего заказа</p>
 </header>
 
-<section class="card">
+<section>
     <h2>Сумма к оплате</h2>
     <div>
         <p><strong>Итого к оплате: {{ total }} BYN</strong></p>
     </div>
 </section>
 
-<section class="card">
+<section>
     <h2>Данные для оплаты и доставки</h2>
-    <form method="post" class="form-group">
+    <form method="post">
         {% csrf_token %}
 
         {% if form.errors %}
-            <div style="background-color: #f8d7da; color: #721c24; padding: 1rem; border: 1px solid #f5c6cb; border-radius: 8px; margin-bottom: 1rem;">
+            <div>
                 <h4>Пожалуйста, исправьте следующие ошибки:</h4>
                 <ul>
                     {% for field in form %}
@@ -36,52 +36,52 @@
             </div>
         {% endif %}
 
-        <div class="form-group">
+        <div>
             <label for="id_full_name">ФИО:</label>
             <input type="text" id="id_full_name" name="full_name" placeholder="Иван Иванов" required>
         </div>
 
-        <div class="form-group">
+        <div>
             <label for="id_email">Email для уведомлений:</label>
             <input type="email" id="id_email" name="email" value="{{ user.email|default:'' }}" placeholder="example@email.com" required>
         </div>
 
-        <div class="form-group">
+        <div>
             <label for="id_address">Адрес доставки:</label>
             <textarea id="id_address" name="address" rows="3" placeholder="Город, улица, дом, квартира" required></textarea>
         </div>
 
-        <hr style="margin: 2rem 0;">
+        <hr>
         <h4>Данные карты</h4>
 
-        <div class="form-group">
+        <div>
             <label for="id_card_number">Номер карты:</label>
             <input type="text" id="id_card_number" name="card_number" placeholder="1234 5678 9012 3456" required>
         </div>
 
-        <div class="grid">
-            <div class="form-group">
+        <div>
+            <div>
                 <label for="id_expiry">Срок действия (ММ/ГГ):</label>
                 <input type="text" id="id_expiry" name="expiry" placeholder="MM/YY" required>
             </div>
-            <div class="form-group">
+            <div>
                 <label for="id_cvc">CVC:</label>
                 <input type="text" id="id_cvc" name="cvc" placeholder="123" required>
             </div>
         </div>
 
-        <div class="form-group">
+        <div>
             <input type="checkbox" id="id_agree" name="agree" required>
             <label for="id_agree">Я согласен с политикой конфиденциальности</label>
         </div>
 
-        <div class="alert alert-success">
+        <div>
             <p><strong>🔒 Безопасность:</strong> Оплата тестовая, данные карты не сохраняются и не передаются третьим лицам.</p>
         </div>
 
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-            <button type="submit" class="btn btn-success">💳 Оплатить заказ</button>
-            <a href="{% url 'cart_view' %}" class="btn btn-secondary">← Вернуться в корзину</a>
+        <div>
+            <button type="submit">💳 Оплатить заказ</button>
+            <a href="{% url 'cart_view' %}">← Вернуться в корзину</a>
         </div>
     </form>
 </section>

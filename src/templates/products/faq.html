@@ -8,17 +8,17 @@
     <p>Найдите ответы на самые популярные вопросы о наших товарах и услугах</p>
 </header>
 
-<section class="card">
+<section>
     {% if faqs %}
-        <div class="faq-list">
+        <div>
             {% for item in faqs %}
-                <article class="card">
+                <article>
                     <details>
                         <summary>
                             <strong>{{ item.question }}</strong>
-                            <time datetime="{{ item.created_at|date:'c' }}" style="float: right; color: #666; font-size: 0.9em;">{{ item.created_at|date:"d.m.Y" }}</time>
+                            <time datetime="{{ item.created_at|date:'c' }}">{{ item.created_at|date:"d.m.Y" }}</time>
                         </summary>
-                        <div style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                        <div>
                             <p>{{ item.answer }}</p>
                         </div>
                     </details>
@@ -26,27 +26,27 @@
             {% endfor %}
         </div>
     {% else %}
-        <div class="alert alert-success">
-            <p>Вопросов пока нет. Если у вас есть вопросы, <a href="{% url 'customer_contacts' %}" class="btn">свяжитесь с нами</a></p>
+        <div>
+            <p>Вопросов пока нет. Если у вас есть вопросы, <a href="{% url 'customer_contacts' %}">свяжитесь с нами</a></p>
         </div>
     {% endif %}
 </section>
 
-<section class="card">
+<section>
     <h2>Не нашли ответ на свой вопрос?</h2>
     <p>Мы всегда готовы помочь! Свяжитесь с нами любым удобным способом:</p>
-    <div class="grid">
-        <article class="card">
+    <div>
+        <article>
             <h3>📞 Телефон</h3>
             <p>+375 (29) 123-45-67</p>
             <p><small>Пн-Пт: 9:00-18:00</small></p>
         </article>
-        <article class="card">
+        <article>
             <h3>📧 Email</h3>
             <p>info@furniture-shop.by</p>
             <p><small>Ответим в течение 24 часов</small></p>
         </article>
-        <article class="card">
+        <article>
             <h3>💬 Чат</h3>
             <p>Онлайн-консультант</p>
             <p><small>Доступен с 9:00 до 21:00</small></p>
@@ -54,22 +54,22 @@
     </div>
 </section>
 
-<section class="card">
+<section>
     <h2>Популярные темы</h2>
-    <div class="grid">
-        <article class="card">
+    <div>
+        <article>
             <h3>🚚 Доставка</h3>
             <p>Условия и сроки доставки мебели</p>
         </article>
-        <article class="card">
+        <article>
             <h3>💳 Оплата</h3>
             <p>Способы оплаты и возврата средств</p>
         </article>
-        <article class="card">
+        <article>
             <h3>🔧 Сборка</h3>
             <p>Услуги сборки и установки мебели</p>
         </article>
-        <article class="card">
+        <article>
             <h3>📦 Гарантия</h3>
             <p>Гарантийные обязательства и сервис</p>
         </article>

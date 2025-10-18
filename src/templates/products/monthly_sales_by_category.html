@@ -9,17 +9,17 @@
 <table>
     <thead>
         <tr>
-            <th>Месяц</th>
-            <th>Категория</th>
-            <th>Кол-во продано</th>
+            <th id="sales-month">Месяц</th>
+            <th id="sales-category">Категория</th>
+            <th id="sales-quantity">Кол-во продано</th>
         </tr>
     </thead>
     <tbody>
         {% for row in sales_data %}
         <tr>
-            <td>{{ row.month|date:"Y-m" }}</td>
-            <td>{{ row.product__category__name }}</td>
-            <td>{{ row.total_quantity }}</td>
+            <td headers="sales-month">{{ row.month|date:"Y-m" }}</td>
+            <td headers="sales-category">{{ row.product__category__name }}</td>
+            <td headers="sales-quantity">{{ row.total_quantity }}</td>
         </tr>
         {% endfor %}
     </tbody>

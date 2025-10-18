@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}О компании - Мебельный магазин{% endblock %}
 {% block description %}Узнайте больше о нашей компании, истории развития, сертификатах и команде профессионалов.{% endblock %}
 
@@ -9,11 +10,11 @@
 </header>
 
 {% if company %}
-<section class="card">
+<section>
     <header>
         <h2>О нас</h2>
         {% if company.logo %}
-            <img src="{{ company.logo.url }}" alt="Логотип {{ company.name }}" style="max-width:200px; height:auto; border-radius:10px; margin: 1rem 0;">
+            <img src="{{ company.logo.url }}" alt="Логотип {{ company.name }}" class="company-logo">
         {% endif %}
         <h3>{{ company.name }}</h3>
     </header>
@@ -24,10 +25,10 @@
 </section>
 
 {% if company.video %}
-<section class="card">
+<section class="media-container">
     <h2>Видео о компании</h2>
-    <div style="text-align: center;">
-        <video width="100%" height="auto" controls style="max-width: 800px; border-radius: 10px;">
+    <div>
+        <video width="100%" height="auto" controls class="video-player">
             <source src="{{ company.video.url }}" type="video/mp4">
             Ваш браузер не поддерживает видео.
         </video>
@@ -35,42 +36,43 @@
 </section>
 {% endif %}
 
-<section class="card">
+<section>
     <h2>История компании</h2>
-    <div class="timeline">
+    <ul class="history-list">
         {% for event in company.history.all %}
-        <article class="card">
-            <header>
-                <time datetime="{{ event.year }}">{{ event.year }}</time>
-            </header>
-            <p>{{ event.event }}</p>
-        </article>
+        <li class="history-item">
+            <div class="history-year">{{ event.year }}</div>
+            <div class="history-event">{{ event.event }}</div>
+        </li>
         {% empty %}
-        <p>История пока не заполнена.</p>
+        <li class="history-item">
+            <div class="history-event">История пока не заполнена.</div>
+        </li>
         {% endfor %}
-    </div>
+    </ul>
 </section>
 
-<section class="card">
+<section>
     <h2>Реквизиты компании</h2>
-    <div>
-        <pre style="white-space: pre-wrap; font-family: inherit;">{{ company.requisites }}</pre>
+    <div class="requisites">
+        <pre>{{ company.requisites }}</pre>
     </div>
 </section>
 
-<section class="card">
+<section>
     <h2>Сертификаты и лицензии</h2>
-    <blockquote style="background: #f8f9fa; padding: 1rem; border-left: 4px solid #667eea; border-radius: 8px;">
-        {{ company.certificate_text }}
-    </blockquote>
+    <div class="certificate certificate-border certificate-bg">
+        <blockquote lang="ru">
+            {{ company.certificate_text }}
+        </blockquote>
+    </div>
 </section>
 
 {% if company.audio %}
-<section class="card">
+<section class="media-container">
     <h2>Аудио приветствие</h2>
-    <div style="text-align: center;">
-        <audio controls style="width: 100%; max-width: 500px;">
-            {# ИСПРАВЛЕНО: Добавлено .url #}
+    <div>
+        <audio controls class="audio-player">
             <source src="{{ company.audio.url }}" type="audio/mpeg">
             Ваш браузер не поддерживает аудио.
         </audio>
@@ -80,32 +82,38 @@
 {% endif %}
 
 {% else %}
-<section class="card">
-    <div class="alert alert-success">
+<section>
+    <div>
         <p>Информация о компании пока не добавлена. Мы работаем над наполнением этого раздела.</p>
     </div>
 </section>
 {% endif %}
 
-<section class="card">
+<section>
     <h2>Наши преимущества</h2>
-    <div class="grid">
-        <article class="card">
-            <h3>🏆 Качество</h3>
-            <p>Мы используем только качественные материалы и проверенных поставщиков</p>
+    <div class="advantages-grid">
+        <article class="advantage-card">
+            <span class="advantage-icon">🏆</span>
+            <h3 class="advantage-title">Качество</h3>
+            <p class="advantage-description">Мы используем только качественные материалы и проверенных поставщиков</p>
         </article>
-        <article class="card">
-            <h3>🚚 Доставка</h3>
-            <p>Быстрая и надежная доставка по всей стране</p>
+        <article class="advantage-card">
+            <span class="advantage-icon">🚚</span>
+            <h3 class="advantage-title">Доставка</h3>
+            <p class="advantage-description">Быстрая и надежная доставка по всей стране</p>
         </article>
-        <article class="card">
-            <h3>💬 Поддержка</h3>
-            <p>Квалифицированная поддержка клиентов 24/7</p>
+        <article class="advantage-card">
+            <span class="advantage-icon">💬</span>
+            <h3 class="advantage-title">Поддержка</h3>
+            <p class="advantage-description">Квалифицированная поддержка клиентов 24/7</p>
         </article>
-        <article class="card">
-            <h3>💰 Цены</h3>
-            <p>Доступные цены без переплат</p>
+        <article class="advantage-card">
+            <span class="advantage-icon">💰</span>
+            <h3 class="advantage-title">Цены</h3>
+            <p class="advantage-description">Доступные цены без переплат</p>
         </article>
     </div>
 </section>
+
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
 {% endblock %}

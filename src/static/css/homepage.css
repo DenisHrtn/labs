@@ -1,0 +1,518 @@
+/* Специальные стили для главной страницы */
+
+/* Анимация "Мебельная фабрика" */
+@keyframes boardsFall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(200px) rotate(180deg);
+    }
+    70% {
+        transform: translateY(300px) rotate(360deg);
+    }
+    100% {
+        transform: translateY(400px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes screwsRotate {
+    0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    60% {
+        transform: translateY(150px) rotate(720deg);
+    }
+    100% {
+        transform: translateY(250px) rotate(1080deg);
+        opacity: 0;
+    }
+}
+
+@keyframes hammerSwing {
+    0% {
+        transform: translateY(-80px) rotate(-45deg);
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(100px) rotate(0deg);
+    }
+    75% {
+        transform: translateY(200px) rotate(45deg);
+    }
+    100% {
+        transform: translateY(300px) rotate(90deg);
+        opacity: 0;
+    }
+}
+
+@keyframes furnitureAppear {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2) rotate(180deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+@keyframes furnitureMove {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    25% {
+        transform: translateX(100px) translateY(-50px);
+    }
+    50% {
+        transform: translateX(200px) translateY(0);
+    }
+    75% {
+        transform: translateX(300px) translateY(50px);
+    }
+    100% {
+        transform: translateX(400px) translateY(0);
+    }
+}
+
+@keyframes companyNameAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Контейнер для анимации */
+.animation-container {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #8B4513, #D2691E);
+    border-radius: 15px;
+    margin: 2rem 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Элементы анимации */
+.animation-board {
+    position: absolute;
+    width: 60px;
+    height: 20px;
+    background: linear-gradient(45deg, #8B4513, #A0522D);
+    border-radius: 3px;
+    animation: boardsFall 4s ease-in-out infinite;
+}
+
+.animation-board:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.animation-board:nth-child(2) {
+    left: 30%;
+    animation-delay: 0.5s;
+}
+
+.animation-board:nth-child(3) {
+    left: 50%;
+    animation-delay: 1s;
+}
+
+.animation-board:nth-child(4) {
+    left: 70%;
+    animation-delay: 1.5s;
+}
+
+.animation-board:nth-child(5) {
+    left: 90%;
+    animation-delay: 2s;
+}
+
+.animation-screw {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #C0C0C0;
+    border-radius: 50%;
+    animation: screwsRotate 3s ease-in-out infinite;
+}
+
+.animation-screw:nth-child(6) {
+    left: 20%;
+    animation-delay: 0.3s;
+}
+
+.animation-screw:nth-child(7) {
+    left: 40%;
+    animation-delay: 0.8s;
+}
+
+.animation-screw:nth-child(8) {
+    left: 60%;
+    animation-delay: 1.3s;
+}
+
+.animation-screw:nth-child(9) {
+    left: 80%;
+    animation-delay: 1.8s;
+}
+
+.animation-hammer {
+    position: absolute;
+    width: 40px;
+    height: 8px;
+    background: #8B4513;
+    border-radius: 4px;
+    animation: hammerSwing 3.5s ease-in-out infinite;
+}
+
+.animation-hammer:nth-child(10) {
+    left: 15%;
+    animation-delay: 0.2s;
+}
+
+.animation-hammer:nth-child(11) {
+    left: 35%;
+    animation-delay: 0.7s;
+}
+
+.animation-hammer:nth-child(12) {
+    left: 55%;
+    animation-delay: 1.2s;
+}
+
+.animation-hammer:nth-child(13) {
+    left: 75%;
+    animation-delay: 1.7s;
+}
+
+/* Мебель */
+.animation-furniture {
+    position: absolute;
+    animation: furnitureAppear 2s ease-in-out 4s forwards, furnitureMove 3s ease-in-out 6s infinite;
+    opacity: 0;
+}
+
+.animation-table {
+    width: 80px;
+    height: 50px;
+    background: linear-gradient(45deg, #8B4513, #A0522D);
+    border-radius: 5px;
+    top: 200px;
+    left: 20%;
+}
+
+.animation-chair {
+    width: 30px;
+    height: 40px;
+    background: linear-gradient(45deg, #D2691E, #CD853F);
+    border-radius: 3px;
+    top: 180px;
+    left: 40%;
+}
+
+.animation-cabinet {
+    width: 60px;
+    height: 80px;
+    background: linear-gradient(45deg, #8B4513, #A0522D);
+    border-radius: 5px;
+    top: 150px;
+    left: 60%;
+}
+
+.animation-sofa {
+    width: 100px;
+    height: 40px;
+    background: linear-gradient(45deg, #D2691E, #CD853F);
+    border-radius: 8px;
+    top: 190px;
+    left: 80%;
+}
+
+/* Название компании */
+.company-name {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+    animation: companyNameAppear 2s ease-in-out 8s forwards;
+    opacity: 0;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* Прелоадер в стиле Лего */
+.lego-preloader {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
+    height: 300px;
+    background: linear-gradient(135deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FFEAA7);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2px;
+}
+
+.lego-block {
+    width: 30px;
+    height: 20px;
+    background: #FF6B6B;
+    border-radius: 3px;
+    margin: 2px;
+    display: inline-block;
+    animation: legoBuild 2s ease-in-out infinite;
+    position: relative;
+}
+
+.lego-block:nth-child(1) { animation-delay: 0s; background: #FF6B6B; }
+.lego-block:nth-child(2) { animation-delay: 0.1s; background: #4ECDC4; }
+.lego-block:nth-child(3) { animation-delay: 0.2s; background: #45B7D1; }
+.lego-block:nth-child(4) { animation-delay: 0.3s; background: #96CEB4; }
+.lego-block:nth-child(5) { animation-delay: 0.4s; background: #FFEAA7; }
+.lego-block:nth-child(6) { animation-delay: 0.5s; background: #FF6B6B; }
+.lego-block:nth-child(7) { animation-delay: 0.6s; background: #4ECDC4; }
+.lego-block:nth-child(8) { animation-delay: 0.7s; background: #45B7D1; }
+.lego-block:nth-child(9) { animation-delay: 0.8s; background: #96CEB4; }
+.lego-block:nth-child(10) { animation-delay: 0.9s; background: #FFEAA7; }
+
+.lego-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: legoTitlePulse 2s ease-in-out infinite;
+}
+
+@keyframes legoTitlePulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+@keyframes legoBuild {
+    0% {
+        transform: translateY(-200px) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-100px) rotate(180deg);
+        opacity: 1;
+    }
+    80% {
+        transform: translateY(-50px) rotate(270deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+/* Партнеры - круглые блоки */
+.partners-section {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: linear-gradient(135deg, #F5F5DC, #E6E6FA);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.partner-block {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8B4513, #D2691E);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.3);
+    border: 4px solid #CD853F;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.partner-block::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+}
+
+.partner-block:hover::before {
+    opacity: 1;
+    animation: shine 0.8s ease-in-out;
+}
+
+.partner-block:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 15px 35px rgba(139, 69, 19, 0.4);
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+/* Последняя статья - позиционирование */
+.latest-article {
+    position: relative;
+    background: linear-gradient(135deg, #FFFFFF, #F0F8FF);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #8B4513;
+}
+
+.latest-article::before {
+    content: "📰";
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    font-size: 2rem;
+    background: #8B4513;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Название компании - кернинг */
+.company-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #8B4513;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 2rem 0;
+    text-align: center;
+}
+
+/* Адаптивность для анимации */
+@media (max-width: 768px) {
+    .animation-container {
+        height: 300px;
+    }
+    
+    .company-name {
+        font-size: 2rem;
+    }
+    
+    .lego-preloader {
+        width: 150px;
+        height: 200px;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .lego-block {
+        width: 20px;
+        height: 15px;
+    }
+    
+    .partners-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+    }
+    
+    .partner-block {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .animation-container {
+        height: 200px;
+    }
+    
+    .company-name {
+        font-size: 1.5rem;
+    }
+    
+    .lego-preloader {
+        width: 100px;
+        height: 150px;
+    }
+    
+    .lego-block {
+        width: 15px;
+        height: 10px;
+    }
+    
+    .partners-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+    
+    .partner-block {
+        width: 100px;
+        height: 100px;
+    }
+}

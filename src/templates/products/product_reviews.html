@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Отзывы - Мебельный магазин{% endblock %}
 {% block description %}Читайте отзывы наших клиентов о качестве мебели и сервисе. Оставьте свой отзыв и помогите другим покупателям.{% endblock %}
 
@@ -8,12 +9,12 @@
     <p>Узнайте, что говорят о нас наши клиенты</p>
 </header>
 
-<section class="card">
+<section class="review-form">
     <h2>Оставить отзыв</h2>
     {% if user.is_authenticated %}
-        <form method="post" class="form-group">
+        <form method="post">
             {% csrf_token %}
-            <div class="grid">
+            <div class="form-row">
                 <div class="form-group">
                     <label for="id_product">Товар:</label>
                     {{ form.product }}
@@ -27,72 +28,74 @@
                 <label for="id_comment">Комментарий:</label>
                 {{ form.comment }}
             </div>
-            <button type="submit" class="btn btn-success">📝 Отправить отзыв</button>
+            <button type="submit" class="submit-btn">📝 Отправить отзыв</button>
         </form>
     {% else %}
-        <div class="alert alert-success">
-            <p>Чтобы оставить отзыв, пожалуйста, <a href="{% url 'login' %}" class="btn">войдите</a> в систему или <a href="{% url 'register' %}" class="btn btn-secondary">зарегистрируйтесь</a></p>
+        <div class="login-message">
+            <h2>Войдите в систему</h2>
+            <p>Чтобы оставить отзыв, пожалуйста, войдите в систему или зарегистрируйтесь</p>
+            <a href="{% url 'login' %}">Войти</a>
+            <a href="{% url 'register' %}">Регистрация</a>
         </div>
     {% endif %}
 </section>
 
-<section class="card">
+<section class="reviews-list">
     <h2>Все отзывы</h2>
     {% if reviews %}
-        <div class="grid">
-            {% for review in reviews %}
-            <article class="card">
-                <header>
-                    <h3>{{ review.product.name }}</h3>
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            {% for i in "12345" %}
-                                {% if forloop.counter <= review.rating %}
-                                    <span style="color: #ffc107;">⭐</span>
-                                {% else %}
-                                    <span style="color: #e0e0e0;">⭐</span>
-                                {% endif %}
-                            {% endfor %}
-                            <span style="margin-left: 0.5rem; font-weight: bold;">{{ review.rating }}/5</span>
-                        </div>
-                        <time datetime="{{ review.created_at|date:'c' }}" style="color: #666; font-size: 0.9em;">{{ review.created_at|date:"d.m.Y H:i" }}</time>
+        {% for review in reviews %}
+        <article class="review-item">
+            <header class="review-header">
+                <h3 class="review-product">{{ review.product.name }}</h3>
+                <div class="review-rating">
+                    <div class="review-stars">
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= review.rating %}
+                                <span class="review-star">⭐</span>
+                            {% else %}
+                                <span class="review-star" style="color: #ddd;">⭐</span>
+                            {% endif %}
+                        {% endfor %}
                     </div>
-                </header>
-                
-                <blockquote style="background: #f8f9fa; padding: 1rem; border-left: 4px solid #667eea; border-radius: 8px; margin: 1rem 0;">
-                    <p><em>{{ review.comment }}</em></p>
-                </blockquote>
-                
-                <footer>
-                    <p><strong>От:</strong> {{ review.user.email }}</p>
-                </footer>
-            </article>
-            {% endfor %}
-        </div>
+                    <span class="review-rating-text">{{ review.rating }}/5</span>
+                </div>
+            </header>
+            
+            <div class="review-comment">
+                <p>{{ review.comment }}</p>
+            </div>
+            
+            <footer class="review-author">
+                <p><strong>От:</strong> {{ review.user.email }}</p>
+                <time datetime="{{ review.created_at|date:'c' }}" class="review-date">{{ review.created_at|date:"d.m.Y H:i" }}</time>
+            </footer>
+        </article>
+        {% endfor %}
     {% else %}
-        <div class="alert alert-success">
-            <p>Пока нет отзывов. Станьте первым, кто оставит отзыв!</p>
+        <div class="login-message">
+            <h2>Пока нет отзывов</h2>
+            <p>Станьте первым, кто оставит отзыв!</p>
         </div>
     {% endif %}
 </section>
 
-<section class="card">
-    <h2>Статистика отзывов</h2>
-    <div class="grid">
-        <article class="card">
-            <h3>📊 Общая оценка</h3>
-            <p style="font-size: 2rem; color: #667eea; font-weight: bold;">
-                {{ average_rating|floatformat:1 }} / 5
-            </p>
-        </article>
-        <article class="card">
-            <h3>📝 Количество отзывов</h3>
-            <p style="font-size: 2rem; color: #667eea; font-weight: bold;">{{ reviews|length }}</p>
-        </article>
-        <article class="card">
-            <h3>👥 Довольных клиентов</h3>
-            <p style="font-size: 2rem; color: #667eea; font-weight: bold;">95%</p>
-        </article>
+<section class="reviews-stats">
+    <div class="stat-item">
+        <span class="stat-icon">📊</span>
+        <h3 class="stat-title">Общая оценка</h3>
+        <div class="stat-value">{{ average_rating|floatformat:1 }} / 5</div>
+    </div>
+    <div class="stat-item">
+        <span class="stat-icon">📝</span>
+        <h3 class="stat-title">Количество отзывов</h3>
+        <div class="stat-value">{{ reviews|length }}</div>
+    </div>
+    <div class="stat-item">
+        <span class="stat-icon">👥</span>
+        <h3 class="stat-title">Довольных клиентов</h3>
+        <div class="stat-value">95%</div>
     </div>
 </section>
+
+<link rel="stylesheet" href="{% static 'css/reviews.css' %}">
 {% endblock %}

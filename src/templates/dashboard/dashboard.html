@@ -1,6 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Главная - Мебельный магазин{% endblock %}
 {% block description %}Добро пожаловать в наш мебельный магазин! Широкий ассортимент качественной мебели по доступным ценам.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
 
 {% block content %}
 <header>
@@ -8,25 +13,59 @@
   <p>Добро пожаловать в наш интернет-магазин мебели!</p>
 </header>
 
+<!-- Мебельная фабрика Animation -->
+<div class="animation-container">
+  <!-- Materials -->
+  <div class="animation-board"></div>
+  <div class="animation-screw"></div>
+  <div class="animation-hammer"></div>
+  
+  <!-- Furniture -->
+  <div class="animation-furniture animation-table"></div>
+  <div class="animation-furniture animation-chair">
+    <div class="chair-right-leg"></div>
+  </div>
+  <div class="animation-furniture animation-cabinet"></div>
+  <div class="animation-furniture animation-sofa">
+    <div class="sofa-right-leg"></div>
+  </div>
+  
+  <!-- Company Name -->
+  <div class="company-name">Мебельная фабрика</div>
+</div>
+
+<!-- Lego Preloader -->
+<div class="lego-preloader">
+  <div class="lego-title">🏗️ LEGO</div>
+  <div class="lego-block"></div>
+  <div class="lego-block"></div>
+  <div class="lego-block"></div>
+  <div class="lego-block"></div>
+  <div class="lego-block"></div>
+  <div class="lego-block"></div>
+  <div class="lego-block"></div>
+  <div class="lego-block"></div>
+</div>
+
 {% if company %}
-<section aria-labelledby="logo" class="card">
-  <h2 id="logo" class="visually-hidden">Логотип компании</h2>
+<section aria-labelledby="logo">
+  <h2 id="logo">Логотип компании</h2>
   {% if company.logo %}
-    <img src="{{ company.logo.url }}" alt="Логотип {{ company.name }}" style="max-width:160px;height:auto;border-radius:10px;">
+    <img src="{{ company.logo.url }}" alt="Логотип {{ company.name }}" width="160">
   {% endif %}
   <p><strong>{{ company.name }}</strong> - ваш надежный партнер в мире мебели</p>
 </section>
 {% endif %}
 
-<section aria-labelledby="banners" class="card">
+<section aria-labelledby="banners">
   <h2 id="banners">Наши преимущества</h2>
-  <div class="grid">
-    <figure class="card">
-      <img src="/media/news_images/Доставка.png" alt="Баннер доставка" style="max-width:100%;height:auto;border-radius:10px;">
+  <div>
+    <figure>
+      <img src="/media/news_images/Доставка.png" alt="Баннер доставка" width="100%">
       <figcaption><strong>Быстрая доставка</strong><br>Доставляем мебель в день заказа</figcaption>
     </figure>
-    <figure class="card">
-      <img src="/media/news_images/Обновление_саита.jpg" alt="Баннер обновления" style="max-width:100%;height:auto;border-radius:10px;">
+    <figure>
+      <img src="/media/news_images/Обновление_саита.jpg" alt="Баннер обновления" width="100%">
       <figcaption><strong>Постоянные обновления</strong><br>Новые модели каждую неделю</figcaption>
     </figure>
   </div>
@@ -34,7 +73,7 @@
 </section>
 
 {% if latest_news %}
-<aside class="card" style="background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%); border-left: 4px solid #667eea;">
+<aside>
     <h3>📰 Последние новости</h3>
     <article>
         <header>
@@ -43,43 +82,43 @@
         </header>
         <p>{{ latest_news.content|truncatewords:20 }}</p>
         <footer>
-            <a href="{% url 'news_list' %}" class="btn">Читать все новости →</a>
+            <a href="{% url 'news_list' %}">Читать все новости →</a>
         </footer>
     </article>
 </aside>
 {% endif %}
 
-<nav aria-label="Быстрая навигация по разделам" class="card">
+<nav aria-label="Быстрая навигация по разделам">
   <h2>Быстрая навигация</h2>
-  <ul style="display: flex; gap: 1rem; flex-wrap: wrap;">
-    <li><a href="#catalog" class="btn">📦 Каталог</a></li>
-    <li><a href="#partners" class="btn">🤝 Партнёры</a></li>
-    <li><a href="#news" class="btn">📰 Новости</a></li>
+  <ul>
+    <li><a href="#catalog">📦 Каталог</a></li>
+    <li><a href="#partners">🤝 Партнёры</a></li>
+    <li><a href="#news">📰 Новости</a></li>
   </ul>
 </nav>
 
-<section id="catalog" aria-labelledby="catalog-title" class="card">
+<section id="catalog" aria-labelledby="catalog-title">
   <h2 id="catalog-title">Популярные товары</h2>
-  <div class="grid">
+  <div>
     {% for p in featured_products %}
-      <article class="card">
+      <article itemtype="http://schema.org/Product" itemscope>
         <header>
           <h3><a href="{% url 'product_detail' p.pk %}">{{ p.name }}</a></h3>
         </header>
-        <p><strong>Цена:</strong> {{ p.price }} BYN</p>
+        <p itemprop="priceCurrency"><strong itemprop="price">Цена:</strong> {{ p.price }} BYN</p>
         <p><strong>Категория:</strong> {{ p.category.name }}</p>
         <footer>
-          <a href="{% url 'product_detail' p.pk %}" class="btn">Подробнее</a>
+          <a href="{% url 'product_detail' p.pk %}">Подробнее</a>
         </footer>
       </article>
     {% empty %}
       <p>Товары пока не добавлены.</p>
     {% endfor %}
   </div>
-  <p><a href="{% url 'product_list' %}" class="btn btn-success">Открыть весь каталог →</a></p>
+  <p><a href="{% url 'product_list' %}">Открыть весь каталог →</a></p>
 </section>
 
-<section id="news" aria-labelledby="news-title" class="card">
+<section id="news" aria-labelledby="news-title">
   <h2 id="news-title">Последняя статья</h2>
   {% if latest_news %}
     <article>
@@ -89,7 +128,7 @@
       </header>
       <p>{{ latest_news.content|truncatewords:24 }}</p>
       <footer>
-        <a href="{% url 'news_detail' latest_news.pk %}" class="btn">Читать далее</a>
+        <a href="{% url 'news_detail' latest_news.pk %}">Читать далее</a>
       </footer>
     </article>
   {% else %}
@@ -97,13 +136,13 @@
   {% endif %}
 </section>
 
-<section id="partners" aria-labelledby="partners-title" class="card">
+<section id="partners" aria-labelledby="partners-title">
   <h2 id="partners-title">Наши партнёры</h2>
-  <div class="grid">
+  <div>
     {% for partner in partners %}
-    <article class="card">
+    <article>
       {% if partner.logo %}
-        <img src="{{ partner.logo.url }}" alt="Логотип {{ partner.name }}" style="max-width:120px;height:auto;border-radius:8px;">
+        <img src="{{ partner.logo.url }}" alt="Логотип {{ partner.name }}" width="120">
       {% endif %}
       <h3>
         {% if partner.website %}
@@ -120,10 +159,10 @@
 </section>
 
 {% if user.is_authenticated %}
-<section class="card">
+<section>
   <h2>Ваши заказы</h2>
   {% if orders %}
-    <table class="table">
+    <table>
       <thead>
         <tr>
           <th scope="col">Номер заказа</th>
@@ -151,14 +190,14 @@
     </table>
   {% else %}
     <div>
-      <p>У вас пока нет заказов. <a href="{% url 'product_list' %}" class="btn">Начать покупки</a></p>
+      <p>У вас пока нет заказов. <a href="{% url 'product_list' %}">Начать покупки</a></p>
     </div>
   {% endif %}
 </section>
 {% else %}
-<section class="card">
+<section>
   <div>
-    <p>Чтобы увидеть историю заказов, пожалуйста, <a href="{% url 'login' %}" class="btn">войдите</a> в систему.</p>
+    <p>Чтобы увидеть историю заказов, пожалуйста, <a href="{% url 'login' %}">войдите</a> в систему.</p>
   </div>
 </section>
 {% endif %}

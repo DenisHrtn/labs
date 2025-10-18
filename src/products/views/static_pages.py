@@ -27,3 +27,10 @@ def download_privacy(request):
     return FileResponse(open(filepath, "rb"), as_attachment=True, filename="privacy_policy.pdf")
 
 
+
+
+
+
+
+
+
