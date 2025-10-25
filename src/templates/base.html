@@ -15,6 +15,7 @@
     <link rel="apple-touch-icon" href="/media/apple-touch-icon.ico">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/preloader.css' %}">
     {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -63,7 +64,21 @@
         {% endif %}
     </aside>
 
-    <main>
+    <!-- Lego Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <h2 class="preloader-title">Мебельный магазин</h2>
+            <div class="lego-tower">
+                <div class="lego-block"></div>
+                <div class="lego-block"></div>
+                <div class="lego-block"></div>
+                <div class="lego-block"></div>
+                <div class="lego-block"></div>
+            </div>
+        </div>
+    </div>
+
+    <main id="page-content" style="visibility: hidden; opacity: 0;">
         {% if messages %}
             {% for message in messages %}
                 <div role="alert">{{ message }}</div>
@@ -95,5 +110,47 @@
             <a href="{% url 'customer_contacts' %}">Контакты</a>
         </nav>
     </footer>
+
+    <script>
+    (function() {
+      
+      // Получаем нужные элементы
+      const preloader = document.getElementById('preloader');
+      const content = document.getElementById('page-content');
+      
+      // Минимальное время показа прелоадера (в миллисекундах)
+      // Чтобы анимация успела проиграться, даже если страница загрузится мгновенно
+      const minTime = 1500; // 1.5 секунды
+      const startTime = new Date().getTime();
+
+      if (!preloader || !content) {
+        console.warn("Preloader или Page Content не найдены на странице.");
+        return;
+      }
+
+      // Ждем, пока ВСЯ страница (включая картинки) загрузится
+      window.addEventListener('load', function() {
+        
+        const endTime = new Date().getTime();
+        const elapsedTime = endTime - startTime;
+        
+        // Вычисляем, сколько времени осталось "показывать" прелоадер
+        const remainingTime = Math.max(0, minTime - elapsedTime);
+
+        setTimeout(function() {
+          // 1. Плавно скрываем прелоадер
+          preloader.classList.add('hidden');
+          
+          // 2. Плавно показываем контент
+          //    (Удаляем инлайн-стили, которые его скрывали)
+          content.style.visibility = 'visible';
+          content.style.opacity = '1';
+
+        }, remainingTime);
+        
+      });
+
+    })();
+    </script>
 </body>
 </html>
