@@ -1,0 +1,110 @@
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+
+  background-color: #ffffff;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+#preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.preloader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.preloader-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #8B4513;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  margin: 0;
+  animation: titleFadeIn 1s ease-in-out 0.5s forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes titleFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Стили Башни Лего --- */
+.lego-tower {
+  display: flex;
+  /* Строим башню снизу вверх */
+  flex-direction: column-reverse;
+}
+
+.lego-block {
+  width: 90px;
+  height: 28px;
+  margin-top: 2px; /* Зазор между блоками */
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 3px;
+  
+  /* Начальное состояние для анимации (невидимы и смещены) */
+  opacity: 0;
+  transform: translateY(20px);
+  
+  /* Анимация "установки" блока */
+  animation: stackBlock 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Анимация появления блока */
+@keyframes stackBlock {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Разные цвета и задержка анимации 
+  для каждого блока, чтобы они появлялись по очереди.
+*/
+.lego-block:nth-child(1) { 
+  background-color: #d9534f; /* Красный */
+  animation-delay: 0.1s; 
+}
+.lego-block:nth-child(2) { 
+  background-color: #5cb85c; /* Зеленый */
+  animation-delay: 0.3s; 
+}
+.lego-block:nth-child(3) { 
+  background-color: #f0ad4e; /* Желтый */
+  animation-delay: 0.5s; 
+}
+.lego-block:nth-child(4) { 
+  background-color: #0275d8; /* Синий */
+  animation-delay: 0.7s; 
+}
+.lego-block:nth-child(5) { 
+  background-color: #5bc0de; /* Голубой */
+  animation-delay: 0.9s; 
+}
+
+/* --- Стили Контента --- */
+/* Стили для плавного появления контента.
+*/
+#page-content {
+  transition: opacity 0.4s ease-in;
+}
